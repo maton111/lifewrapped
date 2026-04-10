@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeWrapped - Final Recap</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#000000",
+                    "outline": "#777575",
+                    "primary-dim": "#9c48ea",
+                    "on-surface": "#ffffff",
+                    "error-container": "#a70138",
+                    "tertiary": "#ff7162",
+                    "error": "#ff6e84",
+                    "surface-container": "#1a1919",
+                    "inverse-surface": "#fcf8f8",
+                    "on-secondary-container": "#e4ffe1",
+                    "on-primary-fixed-variant": "#430076",
+                    "on-tertiary-container": "#000000",
+                    "on-error": "#490013",
+                    "on-primary-container": "#360061",
+                    "inverse-primary": "#842cd3",
+                    "primary-fixed": "#c284ff",
+                    "on-surface-variant": "#adaaaa",
+                    "on-tertiary-fixed": "#3a0001",
+                    "surface-container-high": "#201f1f",
+                    "surface-container-low": "#131313",
+                    "secondary-fixed-dim": "#63ef82",
+                    "surface-tint": "#cc97ff",
+                    "on-background": "#ffffff",
+                    "outline-variant": "#494847",
+                    "secondary-dim": "#63ef82",
+                    "primary": "#cc97ff",
+                    "secondary-fixed": "#72fe8f",
+                    "background": "#0e0e0e",
+                    "primary-container": "#c284ff",
+                    "tertiary-fixed": "#ff9285",
+                    "tertiary-container": "#f41d1d",
+                    "primary-fixed-dim": "#b971ff",
+                    "surface-bright": "#2c2c2c",
+                    "tertiary-dim": "#e80f16",
+                    "error-dim": "#d73357",
+                    "surface-dim": "#0e0e0e",
+                    "secondary": "#72fe8f",
+                    "on-tertiary": "#4a0002",
+                    "inverse-on-surface": "#565554",
+                    "on-secondary": "#005f26",
+                    "surface-variant": "#262626",
+                    "on-secondary-fixed-variant": "#006a2b",
+                    "on-primary": "#47007c",
+                    "on-secondary-fixed": "#004a1c",
+                    "surface-container-lowest": "#000000",
+                    "tertiary-fixed-dim": "#ff7b6d",
+                    "surface-container-highest": "#262626",
+                    "on-error-container": "#ffb2b9",
+                    "secondary-container": "#006e2d",
+                    "on-tertiary-fixed-variant": "#7a0004",
+                    "surface": "#0e0e0e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neon-glow-spotify { box-shadow: -4px 0 20px -5px rgba(29, 185, 84, 0.3); }
+        .neon-glow-netflix { box-shadow: -4px 0 20px -5px rgba(229, 9, 20, 0.3); }
+        .neon-glow-steam { box-shadow: -4px 0 20px -5px rgba(23, 26, 33, 0.3); }
+        .neon-glow-google { box-shadow: -4px 0 20px -5px rgba(66, 133, 244, 0.3); }
+        .neon-glow-amazon { box-shadow: -4px 0 20px -5px rgba(255, 153, 0, 0.3); }
+        .neon-glow-instagram { box-shadow: -4px 0 20px -5px rgba(225, 48, 108, 0.3); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 w-full">
+<div class="text-2xl font-bold tracking-tighter text-white uppercase font-['Space_Grotesk']">
+            LifeWrapped
+        </div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-['Space_Grotesk'] tracking-tighter text-neutral-500 hover:text-purple-400 transition-colors" href="#">Overview</a>
+<a class="font-['Space_Grotesk'] tracking-tighter text-neutral-500 hover:text-purple-400 transition-colors" href="#">Music</a>
+<a class="font-['Space_Grotesk'] tracking-tighter text-neutral-500 hover:text-purple-400 transition-colors" href="#">Media</a>
+<a class="font-['Space_Grotesk'] tracking-tighter text-white hover:text-purple-400 transition-colors" href="#">Social</a>
+</nav>
+<button class="bg-surface-variant px-4 py-2 text-purple-500 font-['Space_Grotesk'] tracking-tighter hover:text-purple-400 transition-colors active:scale-95 transition-transform">
+            Start Over
+        </button>
+</header>
+<div class="flex min-h-screen pt-20">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col items-center py-8 h-screen w-20 border-r border-white/10 bg-[#0e0e0e] fixed left-0 top-20">
+<div class="flex flex-col gap-10 items-center w-full">
+<div class="flex flex-col items-center gap-1 group cursor-pointer text-neutral-600 hover:bg-white/5 w-full py-4 duration-300 ease-in-out">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase tracking-widest mt-1">Over</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer text-neutral-600 hover:bg-white/5 w-full py-4 duration-300 ease-in-out">
+<span class="material-symbols-outlined">music_note</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase tracking-widest mt-1">Music</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer text-neutral-600 hover:bg-white/5 w-full py-4 duration-300 ease-in-out">
+<span class="material-symbols-outlined">movie</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase tracking-widest mt-1">Media</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-pointer text-purple-500 border-r-2 border-purple-500 w-full py-4 duration-300 ease-in-out">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">share</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase tracking-widest mt-1">Social</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-20 px-6 py-12 max-w-7xl mx-auto">
+<!-- Hero Header -->
+<section class="mb-20">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="text-neutral-500 font-headline uppercase tracking-[0.3em] text-sm mb-4">The Final Verdict</h2>
+<h1 class="text-6xl md:text-8xl font-headline font-bold tracking-tighter leading-none">
+                            ECCEZIONALE.<br/>
+<span class="text-primary">O FORSE NO.</span>
+</h1>
+</div>
+<div class="max-w-xs">
+<p class="text-on-surface-variant font-body text-lg leading-relaxed italic">
+                            "Un anno intero riassunto in numeri che confermano quello che già sapevamo: hai seriamente bisogno di un hobby che non richieda uno schermo."
+                        </p>
+</div>
+</div>
+</section>
+<!-- Bento Grid of Stats -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+<!-- Spotify Card -->
+<div class="bg-surface-container-low p-8 relative overflow-hidden border-l-4 border-[#1db954] neon-glow-spotify group hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-12">
+<span class="bg-[#1db954]/10 text-[#1db954] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Spotify</span>
+<span class="material-symbols-outlined text-neutral-600 group-hover:text-[#1db954] transition-colors">headset</span>
+</div>
+<div class="space-y-1">
+<p class="text-on-surface-variant font-headline uppercase text-xs tracking-widest">Minuti Ascoltati</p>
+<h3 class="text-5xl font-headline font-bold tracking-tighter">48.291</h3>
+</div>
+<p class="mt-8 text-sm text-neutral-400 italic">"Praticamente il tuo unico amico è un algoritmo svedese."</p>
+</div>
+<!-- Netflix Card -->
+<div class="bg-surface-container-low p-8 relative overflow-hidden border-l-4 border-[#e50914] neon-glow-netflix group hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-12">
+<span class="bg-[#e50914]/10 text-[#e50914] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Netflix</span>
+<span class="material-symbols-outlined text-neutral-600 group-hover:text-[#e50914] transition-colors">tv</span>
+</div>
+<div class="space-y-1">
+<p class="text-on-surface-variant font-headline uppercase text-xs tracking-widest">Ore di Bingeing</p>
+<h3 class="text-5xl font-headline font-bold tracking-tighter">912</h3>
+</div>
+<p class="mt-8 text-sm text-neutral-400 italic">"Hai guardato 'The Office' per la sesta volta. Complimenti per la crescita personale."</p>
+</div>
+<!-- Steam Card -->
+<div class="bg-surface-container-low p-8 relative overflow-hidden border-l-4 border-[#171a21] neon-glow-steam group hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-12">
+<span class="bg-white/10 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest font-body">Steam</span>
+<span class="material-symbols-outlined text-neutral-600 group-hover:text-white transition-colors">sports_esports</span>
+</div>
+<div class="space-y-1">
+<p class="text-on-surface-variant font-headline uppercase text-xs tracking-widest">Achievement Sbloccati</p>
+<h3 class="text-5xl font-headline font-bold tracking-tighter">142</h3>
+</div>
+<p class="mt-8 text-sm text-neutral-400 italic">"Livello 80 in gioco, livello 1 nella vita sociale."</p>
+</div>
+<!-- Google Card -->
+<div class="bg-surface-container-low p-8 relative overflow-hidden border-l-4 border-[#4285f4] neon-glow-google group hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-12">
+<span class="bg-[#4285f4]/10 text-[#4285f4] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Google</span>
+<span class="material-symbols-outlined text-neutral-600 group-hover:text-[#4285f4] transition-colors">search</span>
+</div>
+<div class="space-y-1">
+<p class="text-on-surface-variant font-headline uppercase text-xs tracking-widest">Ricerche Notturne</p>
+<h3 class="text-5xl font-headline font-bold tracking-tighter">3.402</h3>
+</div>
+<p class="mt-8 text-sm text-neutral-400 italic">"Cercare sintomi su WebMD alle 3 di notte non è una diagnosi."</p>
+</div>
+<!-- Instagram Card -->
+<div class="bg-surface-container-low p-8 relative overflow-hidden border-l-4 border-[#e1306c] neon-glow-instagram group hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-12">
+<span class="bg-[#e1306c]/10 text-[#e1306c] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Instagram</span>
+<span class="material-symbols-outlined text-neutral-600 group-hover:text-[#e1306c] transition-colors">photo_camera</span>
+</div>
+<div class="space-y-1">
+<p class="text-on-surface-variant font-headline uppercase text-xs tracking-widest">Scroll Infinito (km)</p>
+<h3 class="text-5xl font-headline font-bold tracking-tighter">12.4</h3>
+</div>
+<p class="mt-8 text-sm text-neutral-400 italic">"Hai fatto più chilometri col pollice che con le gambe."</p>
+</div>
+<!-- Amazon Card -->
+<div class="bg-surface-container-low p-8 relative overflow-hidden border-l-4 border-[#ff9900] neon-glow-amazon group hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-12">
+<span class="bg-[#ff9900]/10 text-[#ff9900] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">Amazon</span>
+<span class="material-symbols-outlined text-neutral-600 group-hover:text-[#ff9900] transition-colors">shopping_cart</span>
+</div>
+<div class="space-y-1">
+<p class="text-on-surface-variant font-headline uppercase text-xs tracking-widest">Acquisti Inutili</p>
+<h3 class="text-5xl font-headline font-bold tracking-tighter">87</h3>
+</div>
+<p class="mt-8 text-sm text-neutral-400 italic">"Bezos ti ringrazia per la sua nuova villa."</p>
+</div>
+</div>
+<!-- Share Action Area -->
+<section class="flex flex-col items-center justify-center space-y-10 py-16 border-t border-white/5">
+<div class="text-center space-y-4">
+<h2 class="text-3xl font-headline font-bold tracking-tight">Pronto a farti giudicare?</h2>
+<p class="text-on-surface-variant">Esporta il tuo LifeWrapped e mostralo al mondo (se ne hai il coraggio).</p>
+</div>
+<button class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-primary-dim rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+<div class="relative px-12 py-6 bg-gradient-to-b from-primary to-primary-dim rounded-lg leading-none flex items-center divide-x divide-on-primary-fixed/20">
+<span class="flex items-center space-x-5">
+<span class="material-symbols-outlined text-on-primary-fixed">share</span>
+<span class="pr-6 text-on-primary-fixed font-headline font-bold text-xl uppercase tracking-tighter">Condividi il tuo LifeWrapped</span>
+</span>
+<span class="pl-6 text-on-primary-fixed/80 group-hover:text-on-primary-fixed transition duration-200 font-headline font-bold">2024</span>
+</div>
+</button>
+<div class="flex gap-4">
+<button class="px-6 py-3 border border-outline-variant/30 hover:border-primary/50 text-on-surface-variant hover:text-on-surface transition-all font-headline uppercase tracking-widest text-xs">
+                        Scarica PDF
+                    </button>
+<button class="px-6 py-3 border border-outline-variant/30 hover:border-primary/50 text-on-surface-variant hover:text-on-surface transition-all font-headline uppercase tracking-widest text-xs">
+                        Solo Testo
+                    </button>
+</div>
+</section>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-[#0a0a0a] w-full py-12 px-6 border-t border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 w-full max-w-7xl mx-auto">
+<div class="text-white font-headline font-bold text-lg uppercase tracking-tighter">
+                LIFEWRAPPED
+            </div>
+<div class="font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-neutral-600">
+                © 2024 LIFEWRAPPED. NO RIGHTS RESERVED.
+            </div>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-neutral-600 hover:text-white transition-opacity opacity-80 hover:opacity-100" href="#">Privacy</a>
+<a class="font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-neutral-600 hover:text-white transition-opacity opacity-80 hover:opacity-100" href="#">API</a>
+<a class="font-['Inter'] text-[10px] uppercase tracking-[0.2em] text-neutral-600 hover:text-white transition-opacity opacity-80 hover:opacity-100" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+</body></html>

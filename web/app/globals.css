@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  /* Surfaces */
+  --color-background: #0e0e0e;
+  --color-surface: #0e0e0e;
+  --color-surface-dim: #0e0e0e;
+  --color-surface-container-lowest: #000000;
+  --color-surface-container-low: #131313;
+  --color-surface-container: #1a1919;
+  --color-surface-container-high: #201f1f;
+  --color-surface-container-highest: #262626;
+  --color-surface-bright: #2c2c2c;
+  --color-surface-variant: #262626;
+
+  /* Text */
+  --color-on-surface: #ffffff;
+  --color-on-surface-variant: #adaaaa;
+  --color-on-background: #ffffff;
+
+  /* Primary (Viola) */
+  --color-primary: #cc97ff;
+  --color-primary-dim: #9c48ea;
+  --color-primary-fixed: #c284ff;
+  --color-primary-fixed-dim: #b971ff;
+  --color-primary-container: #c284ff;
+  --color-on-primary: #47007c;
+  --color-on-primary-fixed: #000000;
+  --color-on-primary-container: #360061;
+
+  /* Borders */
+  --color-outline: #777575;
+  --color-outline-variant: #494847;
+
+  /* Error */
+  --color-error: #ff6e84;
+  --color-error-container: #a70138;
+  --color-on-error: #490013;
+
+  /* Inverse */
+  --color-inverse-surface: #fcf8f8;
+  --color-inverse-primary: #842cd3;
+  --color-inverse-on-surface: #565554;
+
+  /* Platform colors */
+  --color-spotify: #1db954;
+  --color-netflix: #e50914;
+  --color-steam: #1b2838;
+  --color-google: #4285f4;
+  --color-instagram: #e1306c;
+  --color-amazon: #ff9900;
+
+  /* Typography */
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Inter", sans-serif;
+
+  /* Border radius */
+  --radius: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 9999px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: #0e0e0e;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+}
+
+/* Selection */
+::selection {
+  background: #cc97ff;
+  color: #000000;
+}
+
+/* Custom effects */
+.neon-glow {
+  box-shadow: 0 0 40px 0px rgba(168, 85, 247, 0.15);
+}
+
+.neon-glow-hover:hover {
+  box-shadow: 0 0 50px 5px rgba(168, 85, 247, 0.3);
+}
+
+.glass-panel {
+  background: rgba(26, 25, 25, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.neon-glow-spotify  { box-shadow: -4px 0 20px -5px rgba(29, 185, 84, 0.3); }
+.neon-glow-netflix  { box-shadow: -4px 0 20px -5px rgba(229, 9, 20, 0.3); }
+.neon-glow-steam    { box-shadow: -4px 0 20px -5px rgba(23, 26, 33, 0.5); }
+.neon-glow-google   { box-shadow: -4px 0 20px -5px rgba(66, 133, 244, 0.3); }
+.neon-glow-instagram { box-shadow: -4px 0 20px -5px rgba(225, 48, 108, 0.3); }

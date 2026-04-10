@@ -1,0 +1,79 @@
+[
+  {
+    "key": "spotify_night_owl",
+    "threshold": 500,
+    "template": "Hai ascoltato {value} minuti di musica di notte. Stai bene?",
+    "source": "spotify",
+    "field": "NightMinutes"
+  },
+  {
+    "key": "spotify_minutes",
+    "threshold": 30000,
+    "template": "Hai ascoltato {value} minuti di musica. Il tuo unico amico è un algoritmo svedese.",
+    "source": "spotify",
+    "field": "MinutesListened"
+  },
+  {
+    "key": "google_searcher",
+    "threshold": 2000,
+    "template": "Hai fatto {value} ricerche su Google. Sai già tutto, ma non sai niente.",
+    "source": "google",
+    "field": "TotalSearches"
+  },
+  {
+    "key": "google_topic",
+    "threshold": 100,
+    "template": "Hai cercato '{topic}' {value} volte. Hai ancora speranza.",
+    "source": "google",
+    "field": "TotalSearches"
+  },
+  {
+    "key": "netflix_binge",
+    "threshold": 200,
+    "template": "Netflix ti ha rubato {value} ore. Quanti film avresti potuto vedere al cinema?",
+    "source": "netflix",
+    "field": "HoursWatched"
+  },
+  {
+    "key": "netflix_moderate",
+    "threshold": 50,
+    "template": "Hai guardato {value} ore di Netflix. Potresti farne di peggio. Probabilmente lo stai già facendo.",
+    "source": "netflix",
+    "field": "HoursWatched"
+  },
+  {
+    "key": "steam_obsessed",
+    "threshold": 500,
+    "template": "Steam dice che hai {value} ore su un gioco. Hai una famiglia?",
+    "source": "steam",
+    "field": "TopGameHours"
+  },
+  {
+    "key": "steam_total",
+    "threshold": 200,
+    "template": "Hai giocato {value} ore su Steam. Livello massimo nella vita virtuale, livello 1 nella vita reale.",
+    "source": "steam",
+    "field": "TotalSteamHours"
+  },
+  {
+    "key": "instagram_dm",
+    "threshold": 500,
+    "template": "Hai mandato {value} messaggi su Instagram. Il tuo pollice è più allenato delle tue gambe.",
+    "source": "instagram",
+    "field": "TotalDMs"
+  },
+  {
+    "key": "instagram_likes",
+    "threshold": 1000,
+    "template": "Hai messo {value} like su Instagram. Stai sostenendo l'economia dei creator. Prego.",
+    "source": "instagram",
+    "field": "TotalLikes"
+  },
+  {
+    "key": "youtube_views",
+    "threshold": 500,
+    "template": "Hai guardato {value} video su YouTube. Google sa cosa ti piace. Forse meglio di te.",
+    "source": "google",
+    "field": "YouTubeViews"
+  }
+]

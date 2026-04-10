@@ -1,0 +1,28 @@
+# ─── .NET ───────────────────────────────────────────
+api/**/bin/
+api/**/obj/
+api/**/*.user
+api/**/.env
+api/**/appsettings.Production.json
+
+# ─── Node / Next.js ──────────────────────────────────
+web/node_modules/
+web/.next/
+web/out/
+web/.env.local
+web/.env.production.local
+web/.env.development.local
+
+# ─── OS / IDE ────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+*.suo
+*.ncrunch*
+.vs/
+
+# ─── Secrets ─────────────────────────────────────────
+*.env
+.env.*
+!.env.*.example
+!.env.local.example

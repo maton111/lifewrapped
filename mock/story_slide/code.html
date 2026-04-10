@@ -1,0 +1,201 @@
+<html class="dark" lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-fixed": "#000000",
+            "outline": "#777575",
+            "primary-dim": "#9c48ea",
+            "on-surface": "#ffffff",
+            "error-container": "#a70138",
+            "tertiary": "#ff7162",
+            "error": "#ff6e84",
+            "surface-container": "#1a1919",
+            "inverse-surface": "#fcf8f8",
+            "on-secondary-container": "#e4ffe1",
+            "on-primary-fixed-variant": "#430076",
+            "on-tertiary-container": "#000000",
+            "on-error": "#490013",
+            "on-primary-container": "#360061",
+            "inverse-primary": "#842cd3",
+            "primary-fixed": "#c284ff",
+            "on-surface-variant": "#adaaaa",
+            "on-tertiary-fixed": "#3a0001",
+            "surface-container-high": "#201f1f",
+            "surface-container-low": "#131313",
+            "secondary-fixed-dim": "#63ef82",
+            "surface-tint": "#cc97ff",
+            "on-background": "#ffffff",
+            "outline-variant": "#494847",
+            "secondary-dim": "#63ef82",
+            "primary": "#cc97ff",
+            "secondary-fixed": "#72fe8f",
+            "background": "#0a0a0a",
+            "primary-container": "#c284ff",
+            "tertiary-fixed": "#ff9285",
+            "tertiary-container": "#f41d1d",
+            "primary-fixed-dim": "#b971ff",
+            "surface-bright": "#2c2c2c",
+            "tertiary-dim": "#e80f16",
+            "error-dim": "#d73357",
+            "surface-dim": "#0e0e0e",
+            "secondary": "#1db954",
+            "on-tertiary": "#4a0002",
+            "inverse-on-surface": "#565554",
+            "on-secondary": "#005f26",
+            "surface-variant": "#262626",
+            "on-secondary-fixed-variant": "#006a2b",
+            "on-primary": "#47007c",
+            "on-secondary-fixed": "#004a1c",
+            "surface-container-lowest": "#000000",
+            "tertiary-fixed-dim": "#ff7b6d",
+            "surface-container-highest": "#262626",
+            "on-error-container": "#ffb2b9",
+            "secondary-container": "#006e2d",
+            "on-tertiary-fixed-variant": "#7a0004",
+            "surface": "#0a0a0a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Space Grotesk"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .neon-glow {
+      text-shadow: 0 0 30px rgba(29, 185, 84, 0.4);
+    }
+    .bg-glow-radial {
+      background: radial-gradient(circle at center, rgba(29, 185, 84, 0.15) 0%, rgba(10, 10, 10, 0) 70%);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body overflow-hidden">
+<!-- Shared Component: TopAppBar (Execution from JSON) -->
+<nav class="fixed top-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 w-full">
+<div class="text-2xl font-bold tracking-tighter text-white uppercase font-['Space_Grotesk']">
+      LifeWrapped
+    </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-neutral-500 font-['Space_Grotesk'] tracking-tighter hover:text-purple-400 transition-colors" href="#">Overview</a>
+<a class="text-white font-['Space_Grotesk'] tracking-tighter hover:text-purple-400 transition-colors" href="#">Music</a>
+<a class="text-neutral-500 font-['Space_Grotesk'] tracking-tighter hover:text-purple-400 transition-colors" href="#">Media</a>
+<a class="text-neutral-500 font-['Space_Grotesk'] tracking-tighter hover:text-purple-400 transition-colors" href="#">Social</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-1.5 rounded-lg font-['Space_Grotesk'] font-bold tracking-tighter active:scale-95 transition-transform">
+      Start Over
+    </button>
+</nav>
+<!-- Story Progress Bar (Progress 3/7) -->
+<div class="fixed top-[72px] left-0 w-full px-4 flex gap-1 z-50">
+<div class="h-1 flex-1 bg-white/20 rounded-full"><div class="h-full w-full bg-white rounded-full"></div></div>
+<div class="h-1 flex-1 bg-white/20 rounded-full"><div class="h-full w-full bg-white rounded-full"></div></div>
+<div class="h-1 flex-1 bg-white/20 rounded-full overflow-hidden"><div class="h-full w-full bg-secondary rounded-full"></div></div>
+<div class="h-1 flex-1 bg-white/20 rounded-full"></div>
+<div class="h-1 flex-1 bg-white/20 rounded-full"></div>
+<div class="h-1 flex-1 bg-white/20 rounded-full"></div>
+<div class="h-1 flex-1 bg-white/20 rounded-full"></div>
+</div>
+<main class="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-glow-radial">
+<!-- Immersive Background Texture -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="absolute inset-0" data-alt="Subtle dark noise and grain texture with deep charcoal and black values for an editorial high-end feel" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCyZUkDL6eZ5wnC6sshntWplWOEWAf4_s1irVugq7Edgyqn4dYGYhSSinVTaMnwChS-2ucFsoBwVPKUFv2WqDzkU0BeCTt3njyZImGD17VuqNPCePWsALy-kf_3M60y_Ep0VomeKvujwGmuuwziMNZCa3JFSgcCUlOmdIus7v2L7nvomq_5UdYyTcI8shb4bEgHHItF_YcwRumh9gDUUMj5jhIU1jedxjd0sW3xL1ARFLXmWjUNA_rgO1PpeZ0Lph6rkuZRW45ocyU'); mix-blend-mode: overlay;"></div>
+</div>
+<!-- Centered Data Point -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<!-- Spotify Branding Context -->
+<div class="flex items-center gap-2 mb-4 opacity-80">
+<span class="material-symbols-outlined text-secondary" data-icon="music_note" style="font-variation-settings: 'FILL' 1;">music_note</span>
+<span class="font-headline text-xs tracking-[0.3em] uppercase text-on-surface-variant">Spotify Audit</span>
+</div>
+<!-- The Giant Number -->
+<h1 class="text-[clamp(5rem,20vw,12rem)] font-headline font-bold text-secondary leading-none tracking-tighter neon-glow">
+        38.421
+      </h1>
+<!-- Unit Label -->
+<p class="font-headline text-2xl md:text-4xl text-on-surface mt-2 tracking-tight">
+        minuti ascoltati su Spotify
+      </p>
+</div>
+<!-- Sarcastic Bottom Content -->
+<div class="absolute bottom-16 left-0 w-full px-6 flex flex-col items-center gap-8">
+<div class="max-w-xl text-center">
+<p class="font-headline text-xl md:text-2xl text-on-surface-variant italic leading-relaxed">
+          "Hai ascoltato 38.000 minuti di musica. <span class="text-on-surface">Stai bene?</span>"
+        </p>
+</div>
+<!-- Interaction Hint -->
+<div class="flex flex-col items-center gap-2">
+<p class="font-label text-[10px] uppercase tracking-[0.2em] text-neutral-600">scroll or wait</p>
+<div class="w-px h-12 bg-gradient-to-b from-secondary/50 to-transparent"></div>
+</div>
+</div>
+<!-- Floating Platform Chip (Asymmetric Layout Element) -->
+<div class="absolute top-1/4 right-10 hidden lg:block rotate-12">
+<div class="bg-secondary/10 border border-secondary/20 px-4 py-2 rounded-full flex items-center gap-3 backdrop-blur-sm">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="equalizer" style="font-variation-settings: 'FILL' 1;">equalizer</span>
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest">Top 1% Global</span>
+</div>
+</div>
+<div class="absolute bottom-1/4 left-10 hidden lg:block -rotate-6">
+<div class="bg-white/5 border border-white/10 px-4 py-2 rounded-full flex items-center gap-3 backdrop-blur-sm">
+<span class="material-symbols-outlined text-white text-sm" data-icon="timer">timer</span>
+<span class="text-[10px] font-bold text-white uppercase tracking-widest">640 Hours Total</span>
+</div>
+</div>
+</main>
+<!-- SideNavBar Anchor (Hidden on Mobile, Visible on Web) -->
+<aside class="fixed left-0 top-0 h-screen w-20 bg-[#0e0e0e] border-r border-white/10 hidden md:flex flex-col items-center py-8 z-40">
+<div class="text-white font-black mb-12 flex flex-col items-center">
+<span class="material-symbols-outlined text-purple-500 text-3xl" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div class="flex flex-col gap-10">
+<div class="group cursor-pointer flex flex-col items-center gap-1 text-neutral-600 hover:bg-white/5 p-2 rounded transition-colors">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Space_Grotesk'] text-[8px] uppercase tracking-widest">Stats</span>
+</div>
+<div class="group cursor-pointer flex flex-col items-center gap-1 text-purple-500 border-r-2 border-purple-500 p-2 transition-colors">
+<span class="material-symbols-outlined" data-icon="music_note" style="font-variation-settings: 'FILL' 1;">music_note</span>
+<span class="font-['Space_Grotesk'] text-[8px] uppercase tracking-widest">Music</span>
+</div>
+<div class="group cursor-pointer flex flex-col items-center gap-1 text-neutral-600 hover:bg-white/5 p-2 rounded transition-colors">
+<span class="material-symbols-outlined" data-icon="movie">movie</span>
+<span class="font-['Space_Grotesk'] text-[8px] uppercase tracking-widest">Media</span>
+</div>
+<div class="group cursor-pointer flex flex-col items-center gap-1 text-neutral-600 hover:bg-white/5 p-2 rounded transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+<span class="font-['Space_Grotesk'] text-[8px] uppercase tracking-widest">Social</span>
+</div>
+</div>
+</aside>
+<!-- Footer (Subtle) -->
+<footer class="fixed bottom-0 w-full bg-[#0a0a0a]/50 py-4 px-6 flex justify-between items-center z-50 pointer-events-none">
+<div class="font-['Inter'] text-[9px] uppercase tracking-[0.2em] text-neutral-600">
+      © 2024 LIFEWRAPPED. NO RIGHTS RESERVED.
+    </div>
+<div class="flex gap-4 pointer-events-auto">
+<a class="font-['Inter'] text-[9px] uppercase tracking-[0.2em] text-neutral-600 hover:text-white transition-opacity" href="#">Privacy</a>
+<a class="font-['Inter'] text-[9px] uppercase tracking-[0.2em] text-neutral-600 hover:text-white transition-opacity" href="#">GitHub</a>
+</div>
+</footer>
+</body></html>

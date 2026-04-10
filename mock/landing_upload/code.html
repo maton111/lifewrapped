@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeWrapped | Il tuo anno in dati</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@300;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#000000",
+                    "outline": "#777575",
+                    "primary-dim": "#9c48ea",
+                    "on-surface": "#ffffff",
+                    "error-container": "#a70138",
+                    "tertiary": "#ff7162",
+                    "error": "#ff6e84",
+                    "surface-container": "#1a1919",
+                    "inverse-surface": "#fcf8f8",
+                    "on-secondary-container": "#e4ffe1",
+                    "on-primary-fixed-variant": "#430076",
+                    "on-tertiary-container": "#000000",
+                    "on-error": "#490013",
+                    "on-primary-container": "#360061",
+                    "inverse-primary": "#842cd3",
+                    "primary-fixed": "#c284ff",
+                    "on-surface-variant": "#adaaaa",
+                    "on-tertiary-fixed": "#3a0001",
+                    "surface-container-high": "#201f1f",
+                    "surface-container-low": "#131313",
+                    "secondary-fixed-dim": "#63ef82",
+                    "surface-tint": "#cc97ff",
+                    "on-background": "#ffffff",
+                    "outline-variant": "#494847",
+                    "secondary-dim": "#63ef82",
+                    "primary": "#cc97ff",
+                    "secondary-fixed": "#72fe8f",
+                    "background": "#0e0e0e",
+                    "primary-container": "#c284ff",
+                    "tertiary-fixed": "#ff9285",
+                    "tertiary-container": "#f41d1d",
+                    "primary-fixed-dim": "#b971ff",
+                    "surface-bright": "#2c2c2c",
+                    "tertiary-dim": "#e80f16",
+                    "error-dim": "#d73357",
+                    "surface-dim": "#0e0e0e",
+                    "secondary": "#72fe8f",
+                    "on-tertiary": "#4a0002",
+                    "inverse-on-surface": "#565554",
+                    "on-secondary": "#005f26",
+                    "surface-variant": "#262626",
+                    "on-secondary-fixed-variant": "#006a2b",
+                    "on-primary": "#47007c",
+                    "on-secondary-fixed": "#004a1c",
+                    "surface-container-lowest": "#000000",
+                    "tertiary-fixed-dim": "#ff7b6d",
+                    "surface-container-highest": "#262626",
+                    "on-error-container": "#ffb2b9",
+                    "secondary-container": "#006e2d",
+                    "on-tertiary-fixed-variant": "#7a0004",
+                    "surface": "#0e0e0e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neon-glow {
+            box-shadow: 0 0 40px 0px rgba(168, 85, 247, 0.15);
+        }
+        .neon-glow-hover:hover {
+            box-shadow: 0 0 50px 5px rgba(168, 85, 247, 0.3);
+        }
+        .glass-panel {
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-xl flex justify-between items-center px-6 py-4 w-full">
+<div class="text-2xl font-bold tracking-tighter text-white uppercase font-['Space_Grotesk']">
+            LifeWrapped
+        </div>
+<nav class="hidden md:flex gap-8 items-center font-['Space_Grotesk'] tracking-tighter">
+<a class="text-white hover:text-purple-400 transition-colors" href="#">Overview</a>
+<a class="text-neutral-500 hover:text-purple-400 transition-colors" href="#">How it works</a>
+<a class="text-neutral-500 hover:text-purple-400 transition-colors" href="#">Privacy</a>
+</nav>
+<button class="bg-primary-container text-on-primary-container px-4 py-1.5 rounded-lg font-bold text-sm hover:scale-95 transition-transform">
+            Start Over
+        </button>
+</header>
+<main class="pt-32 pb-24 px-6 max-w-7xl mx-auto min-h-screen flex flex-col items-center">
+<!-- Hero Section -->
+<section class="text-center mb-20 max-w-3xl">
+<h1 class="font-headline font-extrabold text-6xl md:text-8xl tracking-tighter mb-6 leading-none uppercase">
+                Il tuo anno <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-b from-primary to-primary-dim">in dati</span>
+</h1>
+<p class="font-headline text-xl md:text-2xl text-on-surface-variant font-light tracking-wide">
+                Come Spotify Wrapped, ma per tutta la tua vita digitale.
+            </p>
+</section>
+<!-- Platform Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 w-full mb-16">
+<!-- Google Card -->
+<div class="group relative bg-surface-container-low p-8 rounded-xl flex flex-col items-center justify-between min-h-[320px] hover:bg-surface-container-high transition-all duration-500 border border-white/5">
+<div class="text-center">
+<span class="material-symbols-outlined text-4xl mb-4 block text-[#4285F4]" data-icon="google">google</span>
+<h3 class="font-headline font-bold text-lg mb-2">Google</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Search &amp; Maps</p>
+</div>
+<div class="w-full mt-8">
+<div class="border-2 border-dashed border-outline-variant/30 rounded-lg p-6 flex flex-col items-center justify-center group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-outline-variant mb-2" data-icon="upload_file">upload_file</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant text-center">Drop JSON</span>
+</div>
+</div>
+</div>
+<!-- Instagram Card -->
+<div class="group relative bg-surface-container-low p-8 rounded-xl flex flex-col items-center justify-between min-h-[320px] hover:bg-surface-container-high transition-all duration-500 border border-white/5">
+<div class="text-center">
+<span class="material-symbols-outlined text-4xl mb-4 block text-[#E4405F]" data-icon="photo_camera">photo_camera</span>
+<h3 class="font-headline font-bold text-lg mb-2">Instagram</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Social Pulse</p>
+</div>
+<div class="w-full mt-8">
+<div class="border-2 border-dashed border-outline-variant/30 rounded-lg p-6 flex flex-col items-center justify-center group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-outline-variant mb-2" data-icon="add_circle">add_circle</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant text-center">Data Export</span>
+</div>
+</div>
+</div>
+<!-- Spotify Card -->
+<div class="group relative bg-surface-container-low p-8 rounded-xl flex flex-col items-center justify-between min-h-[320px] hover:bg-surface-container-high transition-all duration-500 border border-white/5">
+<div class="text-center">
+<span class="material-symbols-outlined text-4xl mb-4 block text-[#1DB954]" data-icon="music_note">music_note</span>
+<h3 class="font-headline font-bold text-lg mb-2">Spotify</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Audio Journey</p>
+</div>
+<div class="w-full mt-8">
+<div class="border-2 border-dashed border-outline-variant/30 rounded-lg p-6 flex flex-col items-center justify-center group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-outline-variant mb-2" data-icon="cloud_upload">cloud_upload</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant text-center">Streaming History</span>
+</div>
+</div>
+</div>
+<!-- Netflix Card -->
+<div class="group relative bg-surface-container-low p-8 rounded-xl flex flex-col items-center justify-between min-h-[320px] hover:bg-surface-container-high transition-all duration-500 border border-white/5">
+<div class="text-center">
+<span class="material-symbols-outlined text-4xl mb-4 block text-[#E50914]" data-icon="movie">movie</span>
+<h3 class="font-headline font-bold text-lg mb-2">Netflix</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Binge Stats</p>
+</div>
+<div class="w-full mt-8">
+<div class="border-2 border-dashed border-outline-variant/30 rounded-lg p-6 flex flex-col items-center justify-center group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-outline-variant mb-2" data-icon="drag_handle">drag_handle</span>
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant text-center">CSV Upload</span>
+</div>
+</div>
+</div>
+<!-- Steam Card (Text Input) -->
+<div class="group relative bg-surface-container-low p-8 rounded-xl flex flex-col items-center justify-between min-h-[320px] hover:bg-surface-container-high transition-all duration-500 border border-white/5">
+<div class="text-center">
+<span class="material-symbols-outlined text-4xl mb-4 block text-[#171a21]" data-icon="videogame_asset">videogame_asset</span>
+<h3 class="font-headline font-bold text-lg mb-2">Steam</h3>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-[0.2em]">Gaming Life</p>
+</div>
+<div class="w-full mt-8">
+<div class="flex flex-col gap-2">
+<label class="text-[8px] uppercase tracking-widest text-on-surface-variant">Profile ID</label>
+<input class="w-full bg-surface-container-lowest border-none focus:ring-1 focus:ring-primary rounded-lg text-sm px-4 py-3 placeholder:text-neutral-700" placeholder="7656119..." type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Main CTA -->
+<div class="relative group mt-12">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-primary-dim rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+<button class="relative bg-gradient-to-b from-primary to-primary-dim text-on-primary-fixed px-12 py-5 rounded-full font-headline font-extrabold text-xl uppercase tracking-tighter flex items-center gap-4 transition-transform active:scale-95 neon-glow neon-glow-hover">
+                Genera il mio LifeWrapped
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Sarcastic Commentary -->
+<p class="mt-12 font-headline text-on-surface-variant text-sm italic opacity-60">
+            * I tuoi dati rimangono nel browser. Non ci interessa quanto tempo hai perso su Netflix. Forse.
+        </p>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0a0a0a] w-full py-12 px-6">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 w-full max-w-7xl mx-auto">
+<div class="text-white font-['Inter'] text-[10px] uppercase tracking-[0.2em]">
+                © 2024 LIFEWRAPPED. NO RIGHTS RESERVED.
+            </div>
+<div class="flex gap-8 font-['Inter'] text-[10px] uppercase tracking-[0.2em]">
+<a class="text-neutral-600 hover:text-white transition-opacity" href="#">Privacy</a>
+<a class="text-neutral-600 hover:text-white transition-opacity" href="#">API</a>
+<a class="text-neutral-600 hover:text-white transition-opacity" href="#">GitHub</a>
+</div>
+</div>
+</footer>
+<!-- Decoration element: Glow in the background -->
+<div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+</body></html>
