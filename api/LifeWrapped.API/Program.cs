@@ -2,6 +2,7 @@ using LifeWrapped.API.Data;
 using LifeWrapped.API.Services;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using System.Threading.RateLimiting;
 
 DotNetEnv.Env.Load();
@@ -26,9 +27,9 @@ if (!string.IsNullOrEmpty(connectionString))
 builder.Services.AddHttpClient("Steam");
 
 // Services
-builder.Services.AddScoped<LifeWrapped.API.Services.AggregatorService>();
-builder.Services.AddScoped<LifeWrapped.API.Services.WrappedGeneratorService>();
-builder.Services.AddScoped<LifeWrapped.API.Services.SteamService>();
+builder.Services.AddScoped<AggregatorService>();
+builder.Services.AddScoped<WrappedGeneratorService>();
+builder.Services.AddScoped<SteamService>();
 
 // CORS
 var allowedOrigins = builder.Configuration["ALLOWED_ORIGINS"]?.Split(',')
@@ -67,11 +68,12 @@ var app = builder.Build();
 // Auto-migrate on startup
 if (!string.IsNullOrEmpty(connectionString))
 {
-    using (var scope = app.Services.CreateScope())
-    {
-        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        context.Database.Migrate();
-    }
+    if (app.Environment.IsDevelopment())
+        EnsurePostgresDockerRunning();
+
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    context.Database.Migrate();
 }
 
 if (app.Environment.IsDevelopment())
@@ -85,3 +87,50 @@ app.MapControllers();
 app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTime.UtcNow }));
 
 app.Run();
+
+
+static void EnsurePostgresDockerRunning()
+{
+    const string containerName = "lifewrapped-pg";
+
+    try
+    {
+        // Tenta di avviare il container se esiste già (anche se è fermo)
+        if (RunDocker($"start {containerName}").ExitCode == 0)
+        {
+            Console.WriteLine("[Dev] Container PostgreSQL avviato.");
+            Thread.Sleep(1000);
+            return;
+        }
+
+        // Il container non esiste ancora: crealo
+        Console.WriteLine("[Dev] Creazione container PostgreSQL...");
+        RunDocker($"run -d --name {containerName} " +
+                  "-e POSTGRES_PASSWORD=postgres " +
+                  "-e POSTGRES_DB=lifewrapped " +
+                  "-p 5432:5432 postgres:16");
+
+        // Attendi l'inizializzazione di PostgreSQL
+        Console.WriteLine("[Dev] Attendo che PostgreSQL sia pronto...");
+        Thread.Sleep(3000);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"[Dev] Impossibile avviare Docker automaticamente: {ex.Message}");
+    }
+}
+
+static (int ExitCode, string Output) RunDocker(string arguments)
+{
+    var psi = new ProcessStartInfo("docker", arguments)
+    {
+        RedirectStandardOutput = true,
+        RedirectStandardError = true,
+        UseShellExecute = false
+    };
+
+    using var process = Process.Start(psi)!;
+    var output = process.StandardOutput.ReadToEnd();
+    process.WaitForExit();
+    return (process.ExitCode, output);
+}
