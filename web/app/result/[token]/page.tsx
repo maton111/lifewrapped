@@ -224,7 +224,7 @@ export default async function ResultPage({ params }: Props) {
           <div className="text-white font-bold">LifeWrapped</div>
           <div className="text-neutral-600">© 2025 LIFEWRAPPED. NO RIGHTS RESERVED.</div>
           <div className="flex gap-8 text-neutral-600">
-            <a href="/" className="hover:text-white transition-colors">Privacy</a>
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
             <a href="/" className="hover:text-white transition-colors">GitHub</a>
           </div>
         </div>

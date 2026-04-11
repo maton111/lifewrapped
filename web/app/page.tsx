@@ -362,7 +362,7 @@ export default function Home() {
             © 2025 LIFEWRAPPED. NO RIGHTS RESERVED.
           </div>
           <div className="flex gap-8 text-[10px] uppercase tracking-[0.2em]">
-            <a href="#" className="text-neutral-600 hover:text-white transition-colors">
+            <a href="/privacy" className="text-neutral-600 hover:text-white transition-colors">
               Privacy
             </a>
             <a href="#" className="text-neutral-600 hover:text-white transition-colors">
