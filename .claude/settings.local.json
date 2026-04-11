@@ -6,7 +6,9 @@
       "Bash(npx create-next-app@latest web --typescript --tailwind --app --no-eslint --no-src-dir --no-import-alias --no-git --turbopack)",
       "Bash(npm install:*)",
       "Bash(mkdir:*)",
-      "Bash(dotnet build:*)"
+      "Bash(dotnet build:*)",
+      "Bash(dotnet ef:*)",
+      "Bash(chmod +x:*)"
     ]
   }
 }

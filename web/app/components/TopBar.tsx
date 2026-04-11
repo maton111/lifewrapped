@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import logo from "../assets/logo-lifewrap.svg";
 
 interface TopBarProps {
   showNav?: boolean;
@@ -18,10 +20,14 @@ export default function TopBar({ showNav = true, activeSection }: TopBarProps) {
     <header className="fixed top-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-xl flex justify-between items-center px-6 py-4">
       <Link
         href="/"
-        className="text-2xl font-bold tracking-tighter text-white uppercase"
-        style={{ fontFamily: "var(--font-space-grotesk)" }}
+        className="flex items-center"
       >
-        LifeWrapped
+        <Image
+          src={logo}
+          alt="LifeWrapped"
+          priority
+          className="h-10 w-auto"
+        />
       </Link>
 
       {showNav && (
