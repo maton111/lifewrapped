@@ -1,4 +1,4 @@
-@LifeWrapped.API_HostAddress = http://localhost:5175
+@LifeWrapped.API_HostAddress = https://localhost:7291
 
 GET {{LifeWrapped.API_HostAddress}}/weatherforecast/
 Accept: application/json
