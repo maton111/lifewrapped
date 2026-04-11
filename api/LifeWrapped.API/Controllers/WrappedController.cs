@@ -8,11 +8,15 @@ namespace LifeWrapped.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class WrappedController(AppDbContext db) : ControllerBase
+public class WrappedController(IServiceProvider services) : ControllerBase
 {
     [HttpPost("save")]
     public async Task<IActionResult> Save([FromBody] SaveWrappedRequest request)
     {
+        var db = services.GetService<AppDbContext>();
+        if (db is null)
+            return StatusCode(503, new { error = "Database not configured." });
+
         var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(9))
             .Replace("+", "-").Replace("/", "_").Replace("=", "");
 
@@ -35,6 +39,10 @@ public class WrappedController(AppDbContext db) : ControllerBase
     [HttpGet("{token}")]
     public async Task<IActionResult> Get(string token)
     {
+        var db = services.GetService<AppDbContext>();
+        if (db is null)
+            return StatusCode(503, new { error = "Database not configured." });
+
         var result = await db.WrappedResults
             .FirstOrDefaultAsync(r => r.Token == token);
 

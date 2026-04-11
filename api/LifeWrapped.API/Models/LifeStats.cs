@@ -13,6 +13,18 @@ public class LifeStats
     public int? TotalLikes { get; set; }
     public int? PeakDayOfWeek { get; set; }
     public int? PeakHourInstagram { get; set; }
+    public int? PeakDayInstagramInteractions { get; set; }
+    public int? PeakHourInstagramInteractions { get; set; }
+    public int? TotalStories { get; set; }
+    public int? TotalReposts { get; set; }
+    public int? TotalStoryLikes { get; set; }
+    public List<string>? InstagramInterestingUsers { get; set; }
+    public DateTime? InstagramRangeStartUtc { get; set; }
+    public DateTime? InstagramRangeEndUtc { get; set; }
+    public int? InstagramRangeMonths { get; set; }
+    public DateTime? InstagramLikesRangeStartUtc { get; set; }
+    public DateTime? InstagramLikesRangeEndUtc { get; set; }
+    public int? InstagramLikesRangeMonths { get; set; }
 
     // Spotify
     public long? MsPlayed { get; set; }

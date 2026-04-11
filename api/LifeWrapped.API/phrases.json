@@ -65,9 +65,58 @@
   {
     "key": "instagram_likes",
     "threshold": 1000,
-    "template": "Hai messo {value} like su Instagram. Stai sostenendo l'economia dei creator. Prego.",
+    "template": "Hai messo {value} like su Instagram negli ultimi {igLikesRangeMonths} mesi ({igLikesRangeFrom} - {igLikesRangeTo}).",
     "source": "instagram",
     "field": "TotalLikes"
+  },
+  {
+    "key": "instagram_time_window",
+    "threshold": 1,
+    "template": "Le analisi Instagram coprono circa {value} mesi, dal {igRangeFrom} al {igRangeTo}.",
+    "source": "instagram",
+    "field": "InstagramRangeMonths"
+  },
+  {
+    "key": "instagram_stories",
+    "threshold": 20,
+    "template": "Hai pubblicato {value} storie: la tua vita è una serie in tempo reale.",
+    "source": "instagram",
+    "field": "TotalStories"
+  },
+  {
+    "key": "instagram_reposts",
+    "threshold": 10,
+    "template": "Hai fatto {value} repost. Curatore ufficiale del feed altrui.",
+    "source": "instagram",
+    "field": "TotalReposts"
+  },
+  {
+    "key": "instagram_story_likes",
+    "threshold": 20,
+    "template": "Hai lasciato {value} like alle storie. Presenza costante e silenziosa.",
+    "source": "instagram",
+    "field": "TotalStoryLikes"
+  },
+  {
+    "key": "instagram_peak_day",
+    "threshold": 30,
+    "template": "Il giorno più attivo su Instagram è stato {igPeakDay}, con {igPeakDayCount} attività.",
+    "source": "instagram",
+    "field": "PeakDayInstagramInteractions"
+  },
+  {
+    "key": "instagram_peak_hour",
+    "threshold": 10,
+    "template": "La tua ora di punta su Instagram è stata intorno alle {igPeakHour}, con {igPeakHourCount} attività.",
+    "source": "instagram",
+    "field": "PeakHourInstagramInteractions"
+  },
+  {
+    "key": "instagram_top_users",
+    "threshold": 1,
+    "template": "Utenti che compaiono più spesso nelle tue attività: {igTopUsers}.",
+    "source": "instagram",
+    "field": "TotalStories"
   },
   {
     "key": "youtube_views",

@@ -67,9 +67,11 @@ var app = builder.Build();
 // Auto-migrate on startup
 if (!string.IsNullOrEmpty(connectionString))
 {
-    using var scope = app.Services.CreateScope();
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        context.Database.Migrate();
+    }
 }
 
 if (app.Environment.IsDevelopment())

@@ -9,6 +9,7 @@ namespace LifeWrapped.API.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [EnableRateLimiting("upload")]
+[RequestSizeLimit(50 * 1024 * 1024)]
 public class UploadController(
     AggregatorService aggregator,
     WrappedGeneratorService generator) : ControllerBase

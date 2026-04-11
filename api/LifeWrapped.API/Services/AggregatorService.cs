@@ -22,6 +22,18 @@ public class AggregatorService
             merged.TotalLikes = instagram.TotalLikes;
             merged.PeakDayOfWeek = instagram.PeakDayOfWeek;
             merged.PeakHourInstagram = instagram.PeakHourInstagram;
+            merged.PeakDayInstagramInteractions = instagram.PeakDayInstagramInteractions;
+            merged.PeakHourInstagramInteractions = instagram.PeakHourInstagramInteractions;
+            merged.TotalStories = instagram.TotalStories;
+            merged.TotalReposts = instagram.TotalReposts;
+            merged.TotalStoryLikes = instagram.TotalStoryLikes;
+            merged.InstagramInterestingUsers = instagram.InstagramInterestingUsers;
+            merged.InstagramRangeStartUtc = instagram.InstagramRangeStartUtc;
+            merged.InstagramRangeEndUtc = instagram.InstagramRangeEndUtc;
+            merged.InstagramRangeMonths = instagram.InstagramRangeMonths;
+            merged.InstagramLikesRangeStartUtc = instagram.InstagramLikesRangeStartUtc;
+            merged.InstagramLikesRangeEndUtc = instagram.InstagramLikesRangeEndUtc;
+            merged.InstagramLikesRangeMonths = instagram.InstagramLikesRangeMonths;
         }
 
         if (sourceStats.TryGetValue("spotify", out var spotify))
