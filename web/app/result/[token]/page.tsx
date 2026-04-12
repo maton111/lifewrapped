@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
 import { getWrapped } from "../../lib/api";
 import type { LifeStats, WrappedResult } from "../../lib/types";
 import ShareButton from "../../components/ShareButton";
-import logo from "../../assets/logo-lifewrap.svg";
 
 interface Props {
   params: Promise<{ token: string }>;
@@ -98,9 +95,12 @@ export default async function ResultPage({ params }: Props) {
 
       {/* TopBar */}
       <header className="fixed top-0 w-full z-50 bg-[#0a0a0a]/80 backdrop-blur-xl flex justify-between items-center px-6 py-4">
-        <Link href="/" className="flex items-center">
-          <Image src={logo} alt="LifeWrapped" priority className="h-10 w-auto" />
-        </Link>
+        <span
+          className="text-2xl font-bold tracking-tighter text-white uppercase"
+          style={{ fontFamily: "Space Grotesk, sans-serif" }}
+        >
+          LifeWrapped
+        </span>
         <a
           href="/"
           className="text-[#adaaaa] hover:text-white transition-colors text-sm"

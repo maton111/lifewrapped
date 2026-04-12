@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import logo from "./assets/logo-lifewrap.svg";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,11 +18,6 @@ export const metadata: Metadata = {
   title: "LifeWrapped | Il tuo anno in dati",
   description:
     "Come Spotify Wrapped, ma per tutta la tua vita digitale. Carica i tuoi dati da Google, Instagram, Spotify, Netflix e Steam.",
-  icons: {
-    icon: logo.src,
-    shortcut: logo.src,
-    apple: logo.src,
-  },
   openGraph: {
     title: "LifeWrapped | Il tuo anno in dati",
     description:
