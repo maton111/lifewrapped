@@ -12,26 +12,25 @@ import ShareButton from "./components/ShareButton";
 import { uploadFiles, lookupSteam, saveWrapped } from "./lib/api";
 import type { SourceKey, LifeStats, UploadResponse } from "./lib/types";
 import { PLATFORMS } from "./lib/types";
+import { mapSourceCards } from "./lib/statsMapper";
 import { motion } from "framer-motion";
 import { staggerContainer } from "./lib/animations";
 
 type AppState = "landing" | "loading" | "story" | "recap";
 
-const PLATFORM_ICONS: Record<string, string> = {
-  google: "search",
-  instagram: "photo_camera",
-  spotify: "music_note",
-  netflix: "tv",
-  steam: "sports_esports",
-};
+function mergeStatsPreservingValues(base: LifeStats, incoming: LifeStats): LifeStats {
+  const next: LifeStats = { ...base };
 
-const PLATFORM_COLORS: Record<string, string> = {
-  google: "#4285f4",
-  instagram: "#e1306c",
-  spotify: "#1db954",
-  netflix: "#e50914",
-  steam: "#c7d5e0",
-};
+  for (const [key, value] of Object.entries(incoming)) {
+    if (value != null) {
+      next[key] = value;
+    } else if (!(key in next)) {
+      next[key] = value;
+    }
+  }
+
+  return next;
+}
 
 const GLOW_CLASSES: Record<string, string> = {
   google: "neon-glow-google",
@@ -40,32 +39,6 @@ const GLOW_CLASSES: Record<string, string> = {
   netflix: "neon-glow-netflix",
   steam: "neon-glow-steam",
 };
-
-function getStatForSource(
-  source: string,
-  stats: LifeStats
-): { label: string; value: number | string } | null {
-  switch (source) {
-    case "spotify":
-      if (!stats.msPlayed) return null;
-      return { label: "Minuti Ascoltati", value: Math.round(stats.msPlayed / 60000) };
-    case "netflix":
-      if (!stats.hoursWatched) return null;
-      return { label: "Ore di Bingeing", value: Math.round(stats.hoursWatched) };
-    case "steam":
-      if (!stats.totalSteamHours) return null;
-      return { label: "Ore su Steam", value: Math.round(stats.totalSteamHours) };
-    case "google":
-      if (!stats.totalSearches) return null;
-      return { label: "Ricerche Totali", value: stats.totalSearches };
-    case "instagram":
-      if (stats.totalLikes) return { label: "Like Dati", value: stats.totalLikes };
-      if (stats.totalDMs) return { label: "Messaggi Inviati", value: stats.totalDMs };
-      return null;
-    default:
-      return null;
-  }
-}
 
 export default function Home() {
   const [appState, setAppState] = useState<AppState>("landing");
@@ -118,7 +91,7 @@ export default function Home() {
       if (selected.has("steam") && steamId.trim()) {
         try {
           const steamStats = await lookupSteam(steamId.trim());
-          mergedStats = { ...mergedStats, ...steamStats };
+          mergedStats = mergeStatsPreservingValues(mergedStats, steamStats);
           sources.push("steam");
         } catch (e: unknown) {
           const msg = e instanceof Error ? e.message : "STEAM_ERROR";
@@ -150,6 +123,7 @@ export default function Home() {
       <>
         <TopBar showNav={false} />
         <StoryScroll
+          sources={uploadResult.sources}
           stats={uploadResult.stats}
           phrases={uploadResult.phrases}
           onComplete={() => setAppState("recap")}
@@ -160,6 +134,8 @@ export default function Home() {
 
   // ── Final recap ──────────────────────────────────────────
   if (appState === "recap" && uploadResult) {
+    const sourceCards = mapSourceCards(uploadResult.sources, uploadResult.stats, uploadResult.phrases);
+
     return (
       <>
         <TopBar showNav={false} />
@@ -197,23 +173,16 @@ export default function Home() {
               initial="initial"
               animate="animate"
             >
-              {uploadResult.sources.map((source) => {
-                const stat = getStatForSource(source, uploadResult.stats);
-                if (!stat) return null;
-                const phrase =
-                  uploadResult.phrases.find((p) =>
-                    p.toLowerCase().includes(source)
-                  ) ?? uploadResult.phrases[0] ?? "";
+              {sourceCards.map((card) => {
                 return (
                   <StatCard
-                    key={source}
-                    platform={source.charAt(0).toUpperCase() + source.slice(1)}
-                    platformColor={PLATFORM_COLORS[source] ?? "#cc97ff"}
-                    label={stat.label}
-                    value={stat.value}
-                    phrase={phrase}
-                    icon={PLATFORM_ICONS[source] ?? "analytics"}
-                    glowClass={GLOW_CLASSES[source]}
+                    key={card.source}
+                    platform={card.sourceLabel}
+                    platformColor={card.sourceColor}
+                    stats={card.stats}
+                    phrase={card.phrase}
+                    icon={card.sourceIcon}
+                    glowClass={GLOW_CLASSES[card.source]}
                   />
                 );
               })}

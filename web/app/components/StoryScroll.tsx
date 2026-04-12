@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { slideVariants, numberCountUp } from "../lib/animations";
-import type { LifeStats } from "../lib/types";
+import type { LifeStats, SourceCardView } from "../lib/types";
+import { mapSourceCards } from "../lib/statsMapper";
 
 interface Slide {
   platform: string;
@@ -16,78 +17,26 @@ interface Slide {
   floatingChip?: string;
 }
 
-function buildSlides(stats: LifeStats, phrases: string[]): Slide[] {
-  const slides: Slide[] = [];
+function buildSlides(cards: SourceCardView[]): Slide[] {
+  return cards.map((card) => {
+    const mainStat = card.stats[0];
+    const floatingStat = card.stats.find((stat) => !stat.isMissing && stat.key !== mainStat?.key);
 
-  if (stats.msPlayed) {
-    const minutes = Math.round(stats.msPlayed / 60000);
-    slides.push({
-      platform: "spotify",
-      platformLabel: "Spotify Audit",
-      platformColor: "#1db954",
-      icon: "music_note",
-      value: minutes.toLocaleString("it-IT"),
-      unit: "minuti ascoltati su Spotify",
-      phrase: phrases.find((p) => p.includes("minuti")) ?? `Hai ascoltato ${minutes.toLocaleString("it-IT")} minuti di musica.`,
-      floatingChip: stats.topArtist ? `Top: ${stats.topArtist}` : undefined,
-    });
-  }
-
-  if (stats.hoursWatched) {
-    slides.push({
-      platform: "netflix",
-      platformLabel: "Netflix Report",
-      platformColor: "#e50914",
-      icon: "tv",
-      value: Math.round(stats.hoursWatched).toLocaleString("it-IT"),
-      unit: "ore di binge-watching",
-      phrase: phrases.find((p) => p.includes("Netflix") || p.includes("ore")) ?? `Netflix ti ha rubato ${Math.round(stats.hoursWatched)} ore.`,
-      floatingChip: stats.topSeries ? `Top: ${stats.topSeries}` : undefined,
-    });
-  }
-
-  if (stats.totalSteamHours) {
-    slides.push({
-      platform: "steam",
-      platformLabel: "Steam Analytics",
-      platformColor: "#c7d5e0",
-      icon: "sports_esports",
-      value: Math.round(stats.totalSteamHours).toLocaleString("it-IT"),
-      unit: "ore su Steam",
-      phrase: phrases.find((p) => p.includes("Steam") || p.includes("gioco")) ?? `Hai giocato ${Math.round(stats.totalSteamHours)} ore su Steam.`,
-      floatingChip: stats.topGame ? `Top: ${stats.topGame}` : undefined,
-    });
-  }
-
-  if (stats.totalSearches) {
-    slides.push({
-      platform: "google",
-      platformLabel: "Google Audit",
-      platformColor: "#4285f4",
-      icon: "search",
-      value: stats.totalSearches.toLocaleString("it-IT"),
-      unit: "ricerche su Google",
-      phrase: phrases.find((p) => p.includes("ricerche") || p.includes("Google")) ?? `Hai fatto ${stats.totalSearches.toLocaleString("it-IT")} ricerche.`,
-    });
-  }
-
-  if (stats.totalDMs || stats.totalLikes) {
-    const val = stats.totalLikes ?? stats.totalDMs ?? 0;
-    slides.push({
-      platform: "instagram",
-      platformLabel: "Instagram Report",
-      platformColor: "#e1306c",
-      icon: "photo_camera",
-      value: val.toLocaleString("it-IT"),
-      unit: stats.totalLikes ? "like messi su Instagram" : "messaggi su Instagram",
-      phrase: phrases.find((p) => p.includes("like") || p.includes("messaggi") || p.includes("Instagram")) ?? `Il pollice non mente.`,
-    });
-  }
-
-  return slides;
+    return {
+      platform: card.source,
+      platformLabel: `${card.sourceLabel} Report`,
+      platformColor: card.sourceColor,
+      icon: card.sourceIcon,
+      value: mainStat?.value ?? "Non disponibile",
+      unit: mainStat?.label ?? "Dati principali",
+      phrase: card.phrase,
+      floatingChip: floatingStat ? `${floatingStat.label}: ${floatingStat.value}` : undefined,
+    };
+  });
 }
 
 interface StoryScrollProps {
+  sources: string[];
   stats: LifeStats;
   phrases: string[];
   onComplete: () => void;
@@ -95,8 +44,8 @@ interface StoryScrollProps {
 
 const AUTO_ADVANCE_MS = 3000;
 
-export default function StoryScroll({ stats, phrases, onComplete }: StoryScrollProps) {
-  const slides = buildSlides(stats, phrases);
+export default function StoryScroll({ sources, stats, phrases, onComplete }: StoryScrollProps) {
+  const slides = buildSlides(mapSourceCards(sources, stats, phrases));
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);

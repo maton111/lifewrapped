@@ -2,12 +2,12 @@
 
 import { motion } from "framer-motion";
 import { cardReveal } from "../lib/animations";
+import type { SourceStatView } from "../lib/types";
 
 interface StatCardProps {
   platform: string;
   platformColor: string;
-  label: string;
-  value: string | number;
+  stats: SourceStatView[];
   phrase: string;
   icon: string;
   glowClass?: string;
@@ -16,8 +16,7 @@ interface StatCardProps {
 export default function StatCard({
   platform,
   platformColor,
-  label,
-  value,
+  stats,
   phrase,
   icon,
   glowClass,
@@ -51,19 +50,26 @@ export default function StatCard({
         </span>
       </div>
 
-      <div className="space-y-1">
-        <p
-          className="text-[#adaaaa] uppercase text-xs tracking-widest"
-          style={{ fontFamily: "var(--font-space-grotesk)" }}
-        >
-          {label}
-        </p>
-        <h3
-          className="text-5xl font-bold tracking-tighter text-white"
-          style={{ fontFamily: "var(--font-space-grotesk)" }}
-        >
-          {typeof value === "number" ? value.toLocaleString("it-IT") : value}
-        </h3>
+      <div className="space-y-4">
+        {stats.map((stat) => (
+          <div key={stat.key} className="space-y-1">
+            <p
+              className="text-[#adaaaa] uppercase text-xs tracking-widest"
+              style={{ fontFamily: "var(--font-space-grotesk)" }}
+            >
+              {stat.label}
+            </p>
+            <h3
+              className="text-3xl font-bold tracking-tighter text-white"
+              style={{
+                fontFamily: "var(--font-space-grotesk)",
+                opacity: stat.isMissing ? 0.6 : 1,
+              }}
+            >
+              {stat.value}
+            </h3>
+          </div>
+        ))}
       </div>
 
       <p className="mt-8 text-sm text-neutral-400 italic">{phrase}</p>

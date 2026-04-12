@@ -25,6 +25,25 @@ export interface LifeStats {
   totalSteamHours?: number | null;
   topGame?: string | null;
   topGameHours?: number | null;
+
+  // Keep unknown backend metrics to avoid losing data in UI mapping.
+  [key: string]: string | number | null | undefined;
+}
+
+export interface SourceStatView {
+  key: string;
+  label: string;
+  value: string;
+  isMissing: boolean;
+}
+
+export interface SourceCardView {
+  source: string;
+  sourceLabel: string;
+  sourceColor: string;
+  sourceIcon: string;
+  phrase: string;
+  stats: SourceStatView[];
 }
 
 export interface WrappedResult {

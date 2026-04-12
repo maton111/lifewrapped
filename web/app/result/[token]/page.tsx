@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getWrapped } from "../../lib/api";
-import type { LifeStats, WrappedResult } from "../../lib/types";
+import type {LifeStats, WrappedResult} from "../../lib/types";
 import ShareButton from "../../components/ShareButton";
+import logo from "../../assets/logo-lifewrap.svg";
+import { mapSourceCards } from "../../lib/statsMapper";
+import Link from "next/link";
 
 interface Props {
   params: Promise<{ token: string }>;
@@ -81,6 +84,8 @@ export default async function ResultPage({ params }: Props) {
     notFound();
   }
 
+  const sourceCards = mapSourceCards(result.sources, result.stats, result.phrases);
+
   return (
     <>
       <link
@@ -138,17 +143,12 @@ export default async function ResultPage({ params }: Props) {
 
         {/* Bento stats grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-24">
-          {result.sources.map((source, i) => {
-            const stat = getMainStat(source, result.stats);
-            if (!stat) return null;
-            const color = PLATFORM_COLORS[source] ?? "#cc97ff";
-            const icon = PLATFORM_ICONS[source] ?? "analytics";
-            const phrase = result.phrases[i] ?? result.phrases[0] ?? "";
+          {sourceCards.map((card, i) => {
             const isWide = i % 3 === 0;
 
             return (
               <div
-                key={source}
+                key={card.source}
                 className={`
                   bg-[#131313] rounded-xl p-8 flex flex-col justify-between
                   border border-transparent hover:border-white/10 transition-all group
@@ -160,35 +160,44 @@ export default async function ResultPage({ params }: Props) {
                   <div className="flex items-center gap-3 mb-6">
                     <div
                       className="w-8 h-8 rounded-full flex items-center justify-center"
-                      style={{ backgroundColor: `${color}33` }}
+                      style={{ backgroundColor: `${card.sourceColor}33` }}
                     >
                       <span
                         className="material-symbols-outlined text-lg"
-                        style={{ color, fontVariationSettings: "'FILL' 1" }}
+                        style={{ color: card.sourceColor, fontVariationSettings: "'FILL' 1" }}
                       >
-                        {icon}
+                        {card.sourceIcon}
                       </span>
                     </div>
                     <span
                       className="text-xs tracking-widest uppercase font-bold"
-                      style={{ color, fontFamily: "Space Grotesk, sans-serif" }}
+                      style={{ color: card.sourceColor, fontFamily: "Space Grotesk, sans-serif" }}
                     >
-                      {source.charAt(0).toUpperCase() + source.slice(1)}
+                      {card.sourceLabel}
                     </span>
                   </div>
-                  <h3
-                    className="text-5xl font-bold text-white mb-4 tracking-tighter leading-tight"
-                    style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                  >
-                    {stat.value}
-                    <span
-                      className="block text-lg font-normal mt-1"
-                      style={{ color }}
-                    >
-                      {stat.label}
-                    </span>
-                  </h3>
-                  <p className="text-[#adaaaa] text-sm max-w-md leading-relaxed">{phrase}</p>
+                  <div className="space-y-4 mb-4">
+                    {card.stats.map((stat) => (
+                      <div key={stat.key}>
+                        <p
+                          className="text-[11px] tracking-widest uppercase"
+                          style={{ color: card.sourceColor, fontFamily: "Space Grotesk, sans-serif" }}
+                        >
+                          {stat.label}
+                        </p>
+                        <p
+                          className="text-3xl font-bold text-white tracking-tight"
+                          style={{
+                            fontFamily: "Space Grotesk, sans-serif",
+                            opacity: stat.isMissing ? 0.6 : 1,
+                          }}
+                        >
+                          {stat.value}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-[#adaaaa] text-sm max-w-md leading-relaxed">{card.phrase}</p>
                 </div>
               </div>
             );
