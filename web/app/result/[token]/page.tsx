@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getWrapped } from "../../lib/api";
-import type {LifeStats, WrappedResult} from "../../lib/types";
+import type { WrappedResult } from "../../lib/types";
 import ShareButton from "../../components/ShareButton";
-import logo from "../../assets/logo-lifewrap.svg";
 import { mapSourceCards } from "../../lib/statsMapper";
-import Link from "next/link";
-import { div } from "framer-motion/client";
 
 interface Props {
   params: Promise<{ token: string }>;
@@ -18,10 +15,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const result = await getWrapped(token);
     return {
       title: "Il mio LifeWrapped 2025",
-      description: result.phrases[0] ?? "Il mio anno in dati.",
+      description: result.phrases[0]?.text ?? "Il mio anno in dati.",
       openGraph: {
         title: "Il mio LifeWrapped 2025",
-        description: result.phrases[0] ?? "Il mio anno in dati.",
+        description: result.phrases[0]?.text ?? "Il mio anno in dati.",
         images: [`/result/${token}/opengraph-image`],
         type: "website",
       },
@@ -36,44 +33,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-const PLATFORM_COLORS: Record<string, string> = {
-  google: "#4285f4",
-  instagram: "#e1306c",
-  spotify: "#1db954",
-  netflix: "#e50914",
-  steam: "#c7d5e0",
-};
-
-const PLATFORM_ICONS: Record<string, string> = {
-  google: "search",
-  instagram: "photo_camera",
-  spotify: "music_note",
-  netflix: "tv",
-  steam: "sports_esports",
-};
-
-function getMainStat(source: string, stats: LifeStats): { label: string; value: string } | null {
-  switch (source) {
-    case "spotify":
-      if (!stats.msPlayed) return null;
-      return { label: "Minuti Ascoltati", value: Math.round(stats.msPlayed / 60000).toLocaleString("it-IT") };
-    case "netflix":
-      if (!stats.hoursWatched) return null;
-      return { label: "Ore di Bingeing", value: Math.round(stats.hoursWatched).toLocaleString("it-IT") };
-    case "steam":
-      if (!stats.totalSteamHours) return null;
-      return { label: "Ore su Steam", value: Math.round(stats.totalSteamHours).toLocaleString("it-IT") };
-    case "google":
-      if (!stats.totalSearches) return null;
-      return { label: "Ricerche Google", value: stats.totalSearches.toLocaleString("it-IT") };
-    case "instagram":
-      if (stats.totalLikes) return { label: "Like Dati", value: stats.totalLikes.toLocaleString("it-IT") };
-      if (stats.totalDMs) return { label: "DM Inviati", value: stats.totalDMs.toLocaleString("it-IT") };
-      return null;
-    default:
-      return null;
-  }
-}
 
 export default async function ResultPage({ params }: Props) {
   const { token } = await params;
