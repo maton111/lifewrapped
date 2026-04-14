@@ -366,14 +366,31 @@ export default function Home() {
       <footer className="bg-[#0a0a0a] w-full py-12 px-6 border-t border-white/[0.04]">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full max-w-7xl mx-auto">
           <div className="text-white text-[10px] uppercase tracking-[0.2em]">
-            © 2025 LIFEWRAPPED. NO RIGHTS RESERVED.
+            © 202 LIFEWRAPPED. NO RIGHTS RESERVED.
           </div>
-          <div className="flex gap-8 text-[10px] uppercase tracking-[0.2em]">
-            <a href="/privacy" className="text-neutral-600 hover:text-white transition-colors">
-              Privacy
+          <div className="flex gap-8 text-[10px] uppercase tracking-[0.2em] items-center">
+            <a
+              href="/privacy"
+              aria-label="Apri la pagina Privacy di LifeWrapped"
+              className="text-neutral-600 hover:text-white transition-colors flex flex-col items-center gap-1"
+            >
+              <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current" strokeWidth="1.8" aria-hidden="true">
+                <path d="M12 3 5 6v6c0 4.97 3.06 8.58 7 9.94 3.94-1.36 7-4.97 7-9.94V6l-7-3Z" />
+                <path d="M9.5 12.5 11.2 14.2 14.8 10.6" />
+              </svg>
+              <span>Privacy</span>
             </a>
-            <a href="#" className="text-neutral-600 hover:text-white transition-colors">
-              GitHub
+            <a
+              href="https://github.com/maton111/lifewrapped"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Apri il repository GitHub di LifeWrapped"
+              className="text-neutral-600 hover:text-white transition-colors flex flex-col items-center gap-1"
+            >
+              <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" aria-hidden="true">
+                <path d="M12 0.3a12 12 0 0 0-3.79 23.39c0.6 0.11 0.82-0.26 0.82-0.58v-2.23c-3.34 0.73-4.04-1.61-4.04-1.61a3.18 3.18 0 0 0-1.33-1.76c-1.08-0.74 0.08-0.72 0.08-0.72a2.52 2.52 0 0 1 1.84 1.24 2.55 2.55 0 0 0 3.48 1 2.55 2.55 0 0 1 0.76-1.6c-2.67-0.3-5.47-1.34-5.47-5.95a4.65 4.65 0 0 1 1.24-3.22 4.32 4.32 0 0 1 0.12-3.17s1.01-0.32 3.3 1.23a11.44 11.44 0 0 1 6.01 0c2.29-1.55 3.29-1.23 3.29-1.23a4.31 4.31 0 0 1 0.12 3.17 4.64 4.64 0 0 1 1.24 3.22c0 4.62-2.81 5.65-5.49 5.94a2.86 2.86 0 0 1 0.82 2.22v3.29c0 0.32 0.21 0.7 0.83 0.58A12 12 0 0 0 12 0.3Z" />
+              </svg>
+              <span>GitHub</span>
             </a>
           </div>
         </div>
