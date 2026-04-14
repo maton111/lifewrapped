@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "Informativa sulla privacy, trattamento dei dati personali e cookie policy di LifeWrapped, ai sensi del GDPR (Reg. UE 2016/679).",
 };
 
-const LAST_UPDATED = "11 aprile 2025";
+const LAST_UPDATED = "11 aprile 2026";
 
 export default function PrivacyPage() {
   return (
@@ -380,7 +380,7 @@ export default function PrivacyPage() {
       <footer className="bg-[#0a0a0a] w-full py-12 px-6 mt-16 border-t border-white/5">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full max-w-3xl mx-auto text-[10px] uppercase tracking-[0.2em]">
           <div className="text-white font-bold">LifeWrapped</div>
-          <div className="text-neutral-600">© 2025 LifeWrapped — Tutti i diritti riservati</div>
+          <div className="text-neutral-600">© 2026 LifeWrapped — Tutti i diritti riservati</div>
           <div className="flex gap-8 text-neutral-600">
             <Link href="/privacy" className="text-[#cc97ff]">Privacy Policy</Link>
             <Link href="/" className="hover:text-white transition-colors">Home</Link>

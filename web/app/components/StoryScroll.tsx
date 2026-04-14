@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { slideVariants, numberCountUp } from "../lib/animations";
-import type { LifeStats, SourceCardView } from "../lib/types";
+import type { LifeStats, PhraseResult, SourceCardView } from "../lib/types";
 import { mapSourceCards } from "../lib/statsMapper";
 
 interface Slide {
@@ -38,7 +38,7 @@ function buildSlides(cards: SourceCardView[]): Slide[] {
 interface StoryScrollProps {
   sources: string[];
   stats: LifeStats;
-  phrases: string[];
+  phrases: PhraseResult[];
   onComplete: () => void;
 }
 

@@ -302,9 +302,9 @@ La pagina è SSR: i dati vengono fetchati lato server per garantire che i meta t
 export async function generateMetadata({ params }) {
   const result = await getWrapped(params.token)
   return {
-    title: "Il mio LifeWrapped 2025",
+    title: "Il mio LifeWrapped 2026",
     openGraph: {
-      title: "Il mio LifeWrapped 2025",
+      title: "Il mio LifeWrapped 2026",
       images: [`/result/${params.token}/opengraph-image`]
     }
   }

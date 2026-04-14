@@ -3,7 +3,7 @@ import { getWrapped } from "../../lib/api";
 import type { LifeStats } from "../../lib/types";
 
 export const runtime = "edge";
-export const alt = "LifeWrapped 2025";
+export const alt = "LifeWrapped 2026";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -62,7 +62,7 @@ export default async function OGImage({ params }: Props) {
   try {
     const result = await getWrapped(token);
     topStats = getTopStats(result.sources, result.stats);
-    phrase = result.phrases[0] ?? phrase;
+    phrase = result.phrases[0]?.text ?? phrase;
   } catch {
     // render fallback
   }
@@ -107,7 +107,7 @@ export default async function OGImage({ params }: Props) {
               textTransform: "uppercase",
             }}
           >
-            2025 ARCHIVE
+            2026 ARCHIVE
           </div>
         </div>
 

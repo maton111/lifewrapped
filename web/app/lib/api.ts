@@ -1,5 +1,6 @@
 import type {
   LifeStats,
+  PhraseResult,
   UploadResponse,
   WrappedResult,
   SaveWrappedResponse,
@@ -49,7 +50,7 @@ export async function lookupSteam(steamId: string): Promise<LifeStats> {
 
 export async function saveWrapped(
   stats: LifeStats,
-  phrases: string[],
+  phrases: PhraseResult[],
   sources: string[]
 ): Promise<SaveWrappedResponse> {
   return apiFetch<SaveWrappedResponse>("/api/wrapped/save", {

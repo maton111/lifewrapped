@@ -10,7 +10,7 @@ import StoryScroll from "./components/StoryScroll";
 import StatCard from "./components/StatCard";
 import ShareButton from "./components/ShareButton";
 import { uploadFiles, lookupSteam, saveWrapped } from "./lib/api";
-import type { SourceKey, LifeStats, UploadResponse } from "./lib/types";
+import type { SourceKey, LifeStats, UploadResponse, PhraseResult } from "./lib/types";
 import { PLATFORMS } from "./lib/types";
 import { mapSourceCards } from "./lib/statsMapper";
 import { motion } from "framer-motion";
@@ -76,7 +76,7 @@ export default function Home() {
     try {
       const fileMap: Record<string, File | File[]> = {};
       let mergedStats: LifeStats = {};
-      let mergedPhrases: string[] = [];
+      let mergedPhrases: PhraseResult[] = [];
       const sources: string[] = [];
 
       for (const key of selected) {
@@ -194,6 +194,7 @@ export default function Home() {
                   phrase={card.phrase}
                   icon={card.sourceIcon}
                   glowClass={GLOW_CLASSES[card.source]}
+                  className={getColSpan(i, sourceCards.length)}
                 />
               ))}
             </motion.div>
@@ -366,7 +367,7 @@ export default function Home() {
       <footer className="bg-[#0a0a0a] w-full py-12 px-6 border-t border-white/[0.04]">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full max-w-7xl mx-auto">
           <div className="text-white text-[10px] uppercase tracking-[0.2em]">
-            © 202 LIFEWRAPPED. NO RIGHTS RESERVED.
+            © 2026 LIFEWRAPPED. NO RIGHTS RESERVED.
           </div>
           <div className="flex gap-8 text-[10px] uppercase tracking-[0.2em] items-center">
             <a

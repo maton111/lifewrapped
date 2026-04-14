@@ -18,7 +18,7 @@ export default function ShareButton({ token }: ShareButtonProps) {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "Il mio LifeWrapped 2025",
+          title: "Il mio LifeWrapped 2026",
           text: "Il mio anno in dati — guarda cosa ha rivelato LifeWrapped",
           url,
         });

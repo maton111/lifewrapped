@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getWrapped } from "../../lib/api";
 import type { WrappedResult } from "../../lib/types";
 import ShareButton from "../../components/ShareButton";
+import StartOverButton from "../../components/StartOverButton";
 import { mapSourceCards } from "../../lib/statsMapper";
 
 interface Props {
@@ -14,17 +15,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const result = await getWrapped(token);
     return {
-      title: "Il mio LifeWrapped 2025",
+      title: "Il mio LifeWrapped 2026",
       description: result.phrases[0]?.text ?? "Il mio anno in dati.",
       openGraph: {
-        title: "Il mio LifeWrapped 2025",
+        title: "Il mio LifeWrapped 2026",
         description: result.phrases[0]?.text ?? "Il mio anno in dati.",
         images: [`/result/${token}/opengraph-image`],
         type: "website",
       },
       twitter: {
         card: "summary_large_image",
-        title: "Il mio LifeWrapped 2025",
+        title: "Il mio LifeWrapped 2026",
         images: [`/result/${token}/opengraph-image`],
       },
     };
@@ -66,13 +67,12 @@ export default async function ResultPage({ params }: Props) {
         >
           LifeWrapped
         </span>
-        <a
-          href="/"
+        <StartOverButton
           className="text-[#adaaaa] hover:text-white transition-colors text-sm"
           style={{ fontFamily: "Space Grotesk, sans-serif" }}
         >
           Start Over
-        </a>
+        </StartOverButton>
       </header>
 
       <main className="pt-24 pb-32 px-6 max-w-7xl mx-auto min-h-screen">
@@ -89,7 +89,7 @@ export default async function ResultPage({ params }: Props) {
               className="text-6xl md:text-8xl font-bold tracking-tighter leading-none mb-8"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
-              The 2025
+              The 2026
               <br />
               <span className="text-[#cc97ff]">Reliquary</span>
             </h1>
@@ -104,61 +104,75 @@ export default async function ResultPage({ params }: Props) {
         {/* Bento stats grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-24">
           {sourceCards.map((card, i) => {
-            const isWide = i % 3 === 0;
+            // Alternate rows: even rows → [8,4], odd rows → [4,8]
+            // Last card alone → full width
+            const isLastAlone = sourceCards.length % 2 !== 0 && i === sourceCards.length - 1;
+            const rowIndex = Math.floor(i / 2);
+            const posInRow = i % 2;
+            let colClass: string;
+            if (isLastAlone) {
+              colClass = "md:col-span-12";
+            } else if (rowIndex % 2 === 0) {
+              colClass = posInRow === 0 ? "md:col-span-8" : "md:col-span-4";
+            } else {
+              colClass = posInRow === 0 ? "md:col-span-4" : "md:col-span-8";
+            }
+            const isNarrow = colClass === "md:col-span-4";
+            // Narrow cards: 2 stats stacked; wide cards: 3 stats in a row
+            const displayStats = isNarrow ? card.stats.slice(0, 2) : card.stats.slice(0, 3);
 
             return (
               <div
                 key={card.source}
-                className={`
-                  bg-[#131313] rounded-xl p-8 flex flex-col justify-between
-                  border border-transparent hover:border-white/10 transition-all group
-                  ${isWide ? "md:col-span-8" : "md:col-span-4"}
-                `}
-                style={{ minHeight: isWide ? 280 : 220 }}
+                className={`bg-[#131313] rounded-xl p-8 flex flex-col gap-6 border border-transparent hover:border-white/10 transition-all ${colClass}`}
+                style={{ minHeight: isNarrow ? 220 : 280 }}
               >
-                <div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div
-                      className="w-8 h-8 rounded-full flex items-center justify-center"
-                      style={{ backgroundColor: `${card.sourceColor}33` }}
-                    >
-                      <span
-                        className="material-symbols-outlined text-lg"
-                        style={{ color: card.sourceColor, fontVariationSettings: "'FILL' 1" }}
-                      >
-                        {card.sourceIcon}
-                      </span>
-                    </div>
+                {/* Source header */}
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: `${card.sourceColor}33` }}
+                  >
                     <span
-                      className="text-xs tracking-widest uppercase font-bold"
-                      style={{ color: card.sourceColor, fontFamily: "Space Grotesk, sans-serif" }}
+                      className="material-symbols-outlined text-lg"
+                      style={{ color: card.sourceColor, fontVariationSettings: "'FILL' 1" }}
                     >
-                      {card.sourceLabel}
+                      {card.sourceIcon}
                     </span>
                   </div>
-                  <div className="space-y-4 mb-4">
-                    {card.stats.map((stat) => (
-                      <div key={stat.key}>
-                        <p
-                          className="text-[11px] tracking-widest uppercase"
-                          style={{ color: card.sourceColor, fontFamily: "Space Grotesk, sans-serif" }}
-                        >
-                          {stat.label}
-                        </p>
-                        <p
-                          className="text-3xl font-bold text-white tracking-tight"
-                          style={{
-                            fontFamily: "Space Grotesk, sans-serif",
-                            opacity: stat.isMissing ? 0.6 : 1,
-                          }}
-                        >
-                          {stat.value}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-[#adaaaa] text-sm max-w-md leading-relaxed">{card.phrase}</p>
+                  <span
+                    className="text-xs tracking-widest uppercase font-bold"
+                    style={{ color: card.sourceColor, fontFamily: "Space Grotesk, sans-serif" }}
+                  >
+                    {card.sourceLabel}
+                  </span>
                 </div>
+
+                {/* Stats */}
+                <div className={`grid gap-x-6 gap-y-4 ${isNarrow ? "grid-cols-1" : "grid-cols-3"}`}>
+                  {displayStats.map((stat) => (
+                    <div key={stat.key} className="min-w-0">
+                      <p
+                        className="text-[11px] tracking-widest uppercase mb-1"
+                        style={{ color: card.sourceColor, fontFamily: "Space Grotesk, sans-serif" }}
+                      >
+                        {stat.label}
+                      </p>
+                      <p
+                        className="text-2xl font-bold tracking-tight truncate"
+                        style={{
+                          fontFamily: "Space Grotesk, sans-serif",
+                          color: stat.isMissing ? "#444" : "white",
+                        }}
+                      >
+                        {stat.isMissing ? "—" : stat.value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Phrase */}
+                <p className="text-[#adaaaa] text-sm leading-relaxed mt-auto">{card.phrase}</p>
               </div>
             );
           })}

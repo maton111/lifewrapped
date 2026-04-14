@@ -10,7 +10,7 @@ interface TopBarProps {
 }
 
 const NAV_LINKS = [
-  { href: "#how-it-works", label: "How it works" },
+  { href: "/how-it-works", label: "How it works" },
   { href: "/privacy", label: "Privacy" },
 ];
 
