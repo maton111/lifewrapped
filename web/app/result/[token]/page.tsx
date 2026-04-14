@@ -6,6 +6,7 @@ import ShareButton from "../../components/ShareButton";
 import logo from "../../assets/logo-lifewrap.svg";
 import { mapSourceCards } from "../../lib/statsMapper";
 import Link from "next/link";
+import { div } from "framer-motion/client";
 
 interface Props {
   params: Promise<{ token: string }>;
