@@ -32,7 +32,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
                 .HasColumnType("jsonb")
                 .HasConversion(
                     v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
-                    v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions?)null)!);
+                    v => JsonSerializer.Deserialize<List<PhraseResult>>(v, (JsonSerializerOptions?)null)!);
 
             entity.Property(e => e.Sources)
                 .HasColumnName("sources")

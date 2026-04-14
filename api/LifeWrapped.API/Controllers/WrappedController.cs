@@ -88,6 +88,6 @@ public class WrappedController(IServiceProvider services) : ControllerBase
 public class SaveWrappedRequest
 {
     public LifeStats Stats { get; set; } = new();
-    public List<string> Phrases { get; set; } = [];
+    public List<PhraseResult> Phrases { get; set; } = [];
     public List<string> Sources { get; set; } = [];
 }

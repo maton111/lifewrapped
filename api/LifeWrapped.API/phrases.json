@@ -1,128 +1,518 @@
 [
   {
-    "key": "spotify_night_owl",
-    "threshold": 500,
-    "template": "Hai ascoltato {value} minuti di musica di notte. Stai bene?",
-    "source": "spotify",
-    "field": "NightMinutes"
-  },
-  {
-    "key": "spotify_minutes",
-    "threshold": 30000,
-    "template": "Hai ascoltato {value} minuti di musica. Il tuo unico amico è un algoritmo svedese.",
-    "source": "spotify",
-    "field": "MinutesListened"
-  },
-  {
-    "key": "google_searcher",
-    "threshold": 2000,
-    "template": "Hai fatto {value} ricerche su Google. Sai già tutto, ma non sai niente.",
-    "source": "google",
-    "field": "TotalSearches"
-  },
-  {
-    "key": "google_topic",
-    "threshold": 100,
-    "template": "Hai cercato '{topic}' {value} volte. Hai ancora speranza.",
-    "source": "google",
-    "field": "TotalSearches"
-  },
-  {
-    "key": "netflix_binge",
-    "threshold": 200,
-    "template": "Netflix ti ha rubato {value} ore. Quanti film avresti potuto vedere al cinema?",
-    "source": "netflix",
-    "field": "HoursWatched"
-  },
-  {
-    "key": "netflix_moderate",
+    "key": "steam_top_game",
+    "tier": 1,
     "threshold": 50,
-    "template": "Hai guardato {value} ore di Netflix. Potresti farne di peggio. Probabilmente lo stai già facendo.",
-    "source": "netflix",
-    "field": "HoursWatched"
+    "templates": [
+      "Hai messo {value} ore su un gioco. Non male, per un essere umano.",
+      "{value} ore su un titolo. Stai esplorando o stai evitando qualcosa?",
+      "Solo {value} ore sul gioco preferito. Forse hai ancora una vita sociale."
+    ],
+    "source": "steam",
+    "field": "TopGameHours"
   },
   {
-    "key": "steam_obsessed",
+    "key": "steam_top_game",
+    "tier": 2,
+    "threshold": 200,
+    "templates": [
+      "{value} ore su un singolo gioco. La tua famiglia ha iniziato a mandare cartoline.",
+      "Hai dedicato {value} ore a un gioco. Un dottorato richiede meno impegno.",
+      "{value} ore. Hai imparato a suonare uno strumento in meno tempo — ma non l'hai fatto."
+    ],
+    "source": "steam",
+    "field": "TopGameHours"
+  },
+  {
+    "key": "steam_top_game",
+    "tier": 3,
     "threshold": 500,
-    "template": "Steam dice che hai {value} ore su un gioco. Hai una famiglia?",
+    "templates": [
+      "Steam dice che hai {value} ore su un gioco. Hai una famiglia?",
+      "{value} ore su un titolo. I personaggi del gioco ti conoscono meglio dei tuoi amici.",
+      "Con {value} ore potresti aver imparato una lingua. Invece hai scelto questo. Rispetto."
+    ],
     "source": "steam",
     "field": "TopGameHours"
   },
   {
     "key": "steam_total",
-    "threshold": 200,
-    "template": "Hai giocato {value} ore su Steam. Livello massimo nella vita virtuale, livello 1 nella vita reale.",
+    "tier": 1,
+    "threshold": 50,
+    "templates": [
+      "{value} ore su Steam. Inizio promettente.",
+      "Hai giocato {value} ore in totale. Steam approva.",
+      "{value} ore di gioco. La tua libreria ringrazia."
+    ],
     "source": "steam",
     "field": "TotalSteamHours"
   },
   {
-    "key": "instagram_dm",
+    "key": "steam_total",
+    "tier": 2,
+    "threshold": 200,
+    "templates": [
+      "{value} ore su Steam. Livello avanzato nella vita virtuale.",
+      "Hai giocato {value} ore. La tua sedia da gaming ha più ore di volo di un pilota.",
+      "{value} ore totali su Steam. Il mouse ha iniziato a lamentarsi."
+    ],
+    "source": "steam",
+    "field": "TotalSteamHours"
+  },
+  {
+    "key": "steam_total",
+    "tier": 3,
+    "threshold": 600,
+    "templates": [
+      "Hai giocato {value} ore su Steam. Livello massimo nella vita virtuale, livello 1 nella vita reale.",
+      "{value} ore di Steam. Gaben ti manda i migliori auguri di pronta guarigione.",
+      "Con {value} ore potresti aver girato l'Europa. Ma l'Europa non aveva achievement."
+    ],
+    "source": "steam",
+    "field": "TotalSteamHours"
+  },
+  {
+    "key": "google_searcher",
+    "tier": 1,
     "threshold": 500,
-    "template": "Hai mandato {value} messaggi su Instagram. Il tuo pollice è più allenato delle tue gambe.",
+    "templates": [
+      "{value} ricerche su Google. Curioso, ma ancora in zona sicura.",
+      "Hai cercato {value} volte. Google ti considera un utente nella media.",
+      "{value} ricerche. Stai ancora cercando risposte o stai solo procrastinando?"
+    ],
+    "source": "google",
+    "field": "TotalSearches"
+  },
+  {
+    "key": "google_searcher",
+    "tier": 2,
+    "threshold": 1500,
+    "templates": [
+      "{value} ricerche su Google. Hai praticamente fatto un corso di laurea informale.",
+      "Hai fatto {value} ricerche. Google ti conosce meglio di tua madre.",
+      "{value} volte hai chiesto aiuto a Google. Quante volte hai chiesto aiuto a una persona?"
+    ],
+    "source": "google",
+    "field": "TotalSearches"
+  },
+  {
+    "key": "google_searcher",
+    "tier": 3,
+    "threshold": 3000,
+    "templates": [
+      "Hai fatto {value} ricerche su Google. Sai già tutto, ma non sai niente.",
+      "{value} ricerche. A questo punto Google dovrebbe pagarti come QA tester.",
+      "{value} query. Il tuo contributo al PIL di Google è stato rilevante quest'anno."
+    ],
+    "source": "google",
+    "field": "TotalSearches"
+  },
+  {
+    "key": "google_topic",
+    "tier": 1,
+    "threshold": 500,
+    "templates": [
+      "Il tuo topic più cercato è stato '{topic}'. Ci stai pensando su.",
+      "Hai cercato '{topic}' più di tutto il resto. Qualcosa non tornava?",
+      "'{topic}' domina la tua storia di ricerca. Google lo sa già."
+    ],
+    "source": "google",
+    "field": "TotalSearches"
+  },
+  {
+    "key": "google_topic",
+    "tier": 2,
+    "threshold": 1500,
+    "templates": [
+      "'{topic}' è il tuo pensiero fisso di quest'anno. Google ha capito.",
+      "Hai cercato '{topic}' più di qualsiasi altra cosa. Hai ancora speranza.",
+      "'{topic}' ovunque nella tua cronologia. Google ti chiama per nome."
+    ],
+    "source": "google",
+    "field": "TotalSearches"
+  },
+  {
+    "key": "google_topic",
+    "tier": 3,
+    "threshold": 3000,
+    "templates": [
+      "'{topic}' cercato ossessivamente. Sei tu l'esperto adesso.",
+      "Wikipedia ti ha messo in lista nera per '{topic}'. Troppi accessi.",
+      "'{topic}' è diventato la tua identità digitale. Qualcuno dovrebbe fermarti."
+    ],
+    "source": "google",
+    "field": "TotalSearches"
+  },
+  {
+    "key": "youtube_views",
+    "tier": 1,
+    "threshold": 200,
+    "templates": [
+      "Hai guardato {value} video su YouTube. Normale amministrazione.",
+      "{value} video su YouTube. L'algoritmo ti sta ancora studiando.",
+      "{value} view su YouTube. Stai ancora controllando cosa guarda il mondo."
+    ],
+    "source": "google",
+    "field": "YouTubeViews"
+  },
+  {
+    "key": "youtube_views",
+    "tier": 2,
+    "threshold": 500,
+    "templates": [
+      "Hai guardato {value} video su YouTube. Google sa cosa ti piace. Forse meglio di te.",
+      "{value} video guardati. Il tuo feed è diventato un'identità.",
+      "{value} video su YouTube. L'algoritmo non è una coincidenza — sei tu."
+    ],
+    "source": "google",
+    "field": "YouTubeViews"
+  },
+  {
+    "key": "youtube_views",
+    "tier": 3,
+    "threshold": 1500,
+    "templates": [
+      "{value} video su YouTube. Hai passato più tempo con i creator che con la tua famiglia.",
+      "{value} view. YouTube ti ha suggerito di fare una pausa. Tu hai rifiutato.",
+      "Con {value} video guardati, hai contribuito all'economia dei creator più di quanto pensi."
+    ],
+    "source": "google",
+    "field": "YouTubeViews"
+  },
+  {
+    "key": "spotify_minutes",
+    "tier": 1,
+    "threshold": 5000,
+    "templates": [
+      "{value} minuti di musica. Un buon sottofondo per la tua vita.",
+      "Hai ascoltato {value} minuti. La musica ti ha tenuto compagnia.",
+      "{value} minuti su Spotify. Qualcuno ha bisogno di una colonna sonora."
+    ],
+    "source": "spotify",
+    "field": "MinutesListened"
+  },
+  {
+    "key": "spotify_minutes",
+    "tier": 2,
+    "threshold": 15000,
+    "templates": [
+      "{value} minuti di musica. Il tuo unico amico è un algoritmo svedese.",
+      "Hai ascoltato {value} minuti. Spotify ti ha dedicato più tempo di chiunque altro.",
+      "{value} minuti di streaming. L'algoritmo ti conosce a memoria — nel senso letterale."
+    ],
+    "source": "spotify",
+    "field": "MinutesListened"
+  },
+  {
+    "key": "spotify_minutes",
+    "tier": 3,
+    "threshold": 30000,
+    "templates": [
+      "Hai ascoltato {value} minuti di musica. Stai bene?",
+      "{value} minuti su Spotify. A quest'ora dovresti avere un contratto discografico.",
+      "{value} minuti di musica. Daniel Ek ti manda i ringraziamenti — personali."
+    ],
+    "source": "spotify",
+    "field": "MinutesListened"
+  },
+  {
+    "key": "spotify_night_owl",
+    "tier": 1,
+    "threshold": 100,
+    "templates": [
+      "Hai ascoltato {value} minuti di notte. Qualcuno ha i suoi orari.",
+      "{value} minuti di musica notturna. Sei un nottambulo o eviti le persone?",
+      "{value} minuti la notte. La musica è la tua coperta emotiva."
+    ],
+    "source": "spotify",
+    "field": "NightMinutes"
+  },
+  {
+    "key": "spotify_night_owl",
+    "tier": 2,
+    "threshold": 500,
+    "templates": [
+      "Hai ascoltato {value} minuti di musica di notte. Stai bene?",
+      "{value} minuti notturni su Spotify. Gli orologi dicono una cosa, tu ne fai un'altra.",
+      "{value} minuti di musica dopo mezzanotte. Il tuo corpo ha un fuso orario tutto suo."
+    ],
+    "source": "spotify",
+    "field": "NightMinutes"
+  },
+  {
+    "key": "spotify_night_owl",
+    "tier": 3,
+    "threshold": 2000,
+    "templates": [
+      "{value} minuti di musica di notte. La terapia del sonno ti chiama.",
+      "Hai passato {value} minuti notturni con le cuffie. Cosa stai elaborando?",
+      "{value} minuti notturni. Spotify sa cose di te che il tuo medico non sa."
+    ],
+    "source": "spotify",
+    "field": "NightMinutes"
+  },
+  {
+    "key": "netflix_binge",
+    "tier": 1,
+    "threshold": 30,
+    "templates": [
+      "{value} ore di Netflix. Hai trovato qualcosa che vale la pena guardare.",
+      "Hai guardato {value} ore di contenuti. Netflix approva.",
+      "{value} ore davanti a Netflix. Niente di cui preoccuparsi — ancora."
+    ],
+    "source": "netflix",
+    "field": "HoursWatched"
+  },
+  {
+    "key": "netflix_binge",
+    "tier": 2,
+    "threshold": 100,
+    "templates": [
+      "Hai guardato {value} ore di Netflix. Potresti farne di peggio. Probabilmente lo stai già facendo.",
+      "{value} ore su Netflix. La tua serie preferita ti conosce per nome.",
+      "{value} ore di contenuti. Il divano ha preso la forma del tuo corpo."
+    ],
+    "source": "netflix",
+    "field": "HoursWatched"
+  },
+  {
+    "key": "netflix_binge",
+    "tier": 3,
+    "threshold": 200,
+    "templates": [
+      "Netflix ti ha rubato {value} ore. Quanti film avresti potuto vedere al cinema?",
+      "{value} ore di Netflix. Reed Hastings ti ha dedicato un brindisi.",
+      "Con {value} ore potresti aver visto ogni film candidato agli Oscar degli ultimi dieci anni. Hai scelto altro."
+    ],
+    "source": "netflix",
+    "field": "HoursWatched"
+  },
+  {
+    "key": "instagram_dm",
+    "tier": 1,
+    "threshold": 100,
+    "templates": [
+      "Hai mandato {value} messaggi su Instagram. Sei socievole.",
+      "{value} DM. Qualcuno ha qualcosa da dire.",
+      "{value} messaggi. Le tue dita conoscono la strada."
+    ],
+    "source": "instagram",
+    "field": "TotalDMs"
+  },
+  {
+    "key": "instagram_dm",
+    "tier": 2,
+    "threshold": 300,
+    "templates": [
+      "{value} DM su Instagram. Il tuo pollice è più allenato delle tue gambe.",
+      "Hai scritto {value} messaggi. Tolstoj ha scritto meno — ma aveva meno Wi-Fi.",
+      "{value} DM. Instagram è diventato il tuo metodo di comunicazione principale."
+    ],
+    "source": "instagram",
+    "field": "TotalDMs"
+  },
+  {
+    "key": "instagram_dm",
+    "tier": 3,
+    "threshold": 700,
+    "templates": [
+      "{value} messaggi su Instagram. Il tuo pollice è più allenato delle tue gambe.",
+      "{value} DM. A quest'ora dovresti avere un agente letterario.",
+      "Hai mandato {value} messaggi. Meta ha costruito un datacenter apposta per te."
+    ],
     "source": "instagram",
     "field": "TotalDMs"
   },
   {
     "key": "instagram_likes",
-    "threshold": 1000,
-    "template": "Hai messo {value} like su Instagram negli ultimi {igLikesRangeMonths} mesi ({igLikesRangeFrom} - {igLikesRangeTo}).",
+    "tier": 1,
+    "threshold": 200,
+    "templates": [
+      "{value} like negli ultimi {igLikesRangeMonths} mesi. Stai partecipando.",
+      "Hai lasciato {value} like. Il tuo pollice approva spesso.",
+      "{value} cuoricini dati. La tua generosità digitale è apprezzata."
+    ],
+    "source": "instagram",
+    "field": "TotalLikes"
+  },
+  {
+    "key": "instagram_likes",
+    "tier": 2,
+    "threshold": 600,
+    "templates": [
+      "Hai messo {value} like su Instagram negli ultimi {igLikesRangeMonths} mesi.",
+      "{value} like dati. Il feed ti ha inghiottito e non te ne sei accorto.",
+      "{value} approvazioni digitali. Stai costruendo relazioni o solo abitudini?"
+    ],
+    "source": "instagram",
+    "field": "TotalLikes"
+  },
+  {
+    "key": "instagram_likes",
+    "tier": 3,
+    "threshold": 1500,
+    "templates": [
+      "Hai messo {value} like su Instagram negli ultimi {igLikesRangeMonths} mesi ({igLikesRangeFrom} - {igLikesRangeTo}).",
+      "{value} like. Il tuo pollice ha lavorato più della tua testa.",
+      "{value} cuoricini. Meta ha analizzato i tuoi gusti meglio di quanto tu abbia mai fatto."
+    ],
     "source": "instagram",
     "field": "TotalLikes"
   },
   {
     "key": "instagram_time_window",
+    "tier": 1,
     "threshold": 1,
-    "template": "Le analisi Instagram coprono circa {value} mesi, dal {igRangeFrom} al {igRangeTo}.",
+    "templates": [
+      "Le analisi Instagram coprono circa {value} mesi, dal {igRangeFrom} al {igRangeTo}.",
+      "Dati Instagram disponibili per {value} mesi: {igRangeFrom} — {igRangeTo}.",
+      "{value} mesi di attività Instagram analizzati. Ecco cosa ne esce."
+    ],
     "source": "instagram",
     "field": "InstagramRangeMonths"
   },
   {
     "key": "instagram_stories",
-    "threshold": 20,
-    "template": "Hai pubblicato {value} storie: la tua vita è una serie in tempo reale.",
+    "tier": 1,
+    "threshold": 10,
+    "templates": [
+      "Hai pubblicato {value} storie. Qualcosa vale la pena condividere.",
+      "{value} stories. Stai documentando la tua vita.",
+      "{value} storie postate. La tua prospettiva merita uno schermo."
+    ],
+    "source": "instagram",
+    "field": "TotalStories"
+  },
+  {
+    "key": "instagram_stories",
+    "tier": 2,
+    "threshold": 50,
+    "templates": [
+      "Hai pubblicato {value} storie: la tua vita è una serie in tempo reale.",
+      "{value} stories. Il tuo profilo è praticamente un reality show.",
+      "{value} storie. I tuoi follower hanno visto più della tua vita di quanto tu pensi."
+    ],
+    "source": "instagram",
+    "field": "TotalStories"
+  },
+  {
+    "key": "instagram_stories",
+    "tier": 3,
+    "threshold": 150,
+    "templates": [
+      "{value} storie pubblicate. La tua vita offline merita altrettanta attenzione.",
+      "{value} stories. Hai documentato ogni momento — tranne quelli che contavano davvero.",
+      "{value} storie. A questo punto hai un archivio storico di te stesso."
+    ],
     "source": "instagram",
     "field": "TotalStories"
   },
   {
     "key": "instagram_reposts",
-    "threshold": 10,
-    "template": "Hai fatto {value} repost. Curatore ufficiale del feed altrui.",
+    "tier": 1,
+    "threshold": 5,
+    "templates": [
+      "Hai fatto {value} repost. Curatore ufficiale del feed altrui.",
+      "{value} repost. Stai amplificando ciò che ti piace.",
+      "{value} contenuti ricondivisi. Il tuo gusto conta."
+    ],
+    "source": "instagram",
+    "field": "TotalReposts"
+  },
+  {
+    "key": "instagram_reposts",
+    "tier": 2,
+    "threshold": 30,
+    "templates": [
+      "{value} repost. Curatore ufficiale del feed altrui.",
+      "Hai ricondiviso {value} post. Il tuo profilo è metà tuo, metà degli altri.",
+      "{value} repost. Stai costruendo un'identità collage."
+    ],
     "source": "instagram",
     "field": "TotalReposts"
   },
   {
     "key": "instagram_story_likes",
-    "threshold": 20,
-    "template": "Hai lasciato {value} like alle storie. Presenza costante e silenziosa.",
+    "tier": 1,
+    "threshold": 10,
+    "templates": [
+      "{value} like alle storie. Piccoli segnali, grande costanza.",
+      "Hai lasciato {value} reaction alle storie. Presenza silenziosa ma presente.",
+      "{value} story likes. Guardi, approvi, vai avanti."
+    ],
+    "source": "instagram",
+    "field": "TotalStoryLikes"
+  },
+  {
+    "key": "instagram_story_likes",
+    "tier": 2,
+    "threshold": 50,
+    "templates": [
+      "Hai lasciato {value} like alle storie. Presenza costante e silenziosa.",
+      "{value} reaction alle storie. Sei uno spettatore fedele.",
+      "{value} story likes. Qualcuno sa sempre che ci sei — senza che tu dica niente."
+    ],
     "source": "instagram",
     "field": "TotalStoryLikes"
   },
   {
     "key": "instagram_peak_day",
-    "threshold": 30,
-    "template": "Il giorno più attivo su Instagram è stato {igPeakDay}, con {igPeakDayCount} attività.",
+    "tier": 1,
+    "threshold": 10,
+    "templates": [
+      "Il tuo giorno più attivo su Instagram è stato {igPeakDay}, con {igPeakDayCount} attività.",
+      "{igPeakDay} è il tuo giorno Instagram. {igPeakDayCount} azioni in un solo giorno.",
+      "Di {igPeakDay} diventi un'altra persona su Instagram: {igPeakDayCount} attività."
+    ],
+    "source": "instagram",
+    "field": "PeakDayInstagramInteractions"
+  },
+  {
+    "key": "instagram_peak_day",
+    "tier": 2,
+    "threshold": 50,
+    "templates": [
+      "Il giorno più attivo su Instagram è stato {igPeakDay}, con {igPeakDayCount} attività.",
+      "{igPeakDayCount} azioni in un {igPeakDay}. Quel giorno Instagram era il tuo lavoro.",
+      "Di {igPeakDay} sei inarrestabile: {igPeakDayCount} interazioni. Cos'era successo?"
+    ],
     "source": "instagram",
     "field": "PeakDayInstagramInteractions"
   },
   {
     "key": "instagram_peak_hour",
-    "threshold": 10,
-    "template": "La tua ora di punta su Instagram è stata intorno alle {igPeakHour}, con {igPeakHourCount} attività.",
+    "tier": 1,
+    "threshold": 5,
+    "templates": [
+      "La tua ora di punta su Instagram è intorno alle {igPeakHour}.",
+      "Alle {igPeakHour} sei più attivo su Instagram. Il corpo ha i suoi ritmi.",
+      "{igPeakHour}: l'orario in cui Instagram ti ritrova sempre online."
+    ],
+    "source": "instagram",
+    "field": "PeakHourInstagramInteractions"
+  },
+  {
+    "key": "instagram_peak_hour",
+    "tier": 2,
+    "threshold": 20,
+    "templates": [
+      "La tua ora di punta su Instagram è stata intorno alle {igPeakHour}, con {igPeakHourCount} attività.",
+      "Alle {igPeakHour} Instagram ti possiede: {igPeakHourCount} azioni in quell'ora.",
+      "{igPeakHour} ogni giorno. Instagram sa quando trovarti — e ci conta."
+    ],
     "source": "instagram",
     "field": "PeakHourInstagramInteractions"
   },
   {
     "key": "instagram_top_users",
+    "tier": 1,
     "threshold": 1,
-    "template": "Utenti che compaiono più spesso nelle tue attività: {igTopUsers}.",
+    "templates": [
+      "Le persone che compaiono di più nelle tue attività: {igTopUsers}.",
+      "{igTopUsers} sono i protagonisti del tuo Instagram.",
+      "Tornavi sempre sugli stessi profili: {igTopUsers}."
+    ],
     "source": "instagram",
     "field": "TotalStories"
-  },
-  {
-    "key": "youtube_views",
-    "threshold": 500,
-    "template": "Hai guardato {value} video su YouTube. Google sa cosa ti piace. Forse meglio di te.",
-    "source": "google",
-    "field": "YouTubeViews"
   }
 ]
