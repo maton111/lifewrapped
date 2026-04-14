@@ -10,7 +10,7 @@ interface TopBarProps {
 const NAV_LINKS = [
   { href: "#overview", label: "Overview" },
   { href: "#how-it-works", label: "How it works" },
-  { href: "#privacy", label: "Privacy" },
+  { href: "/privacy", label: "Privacy" },
 ];
 
 export default function TopBar({ showNav = true, activeSection }: TopBarProps) {
