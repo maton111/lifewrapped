@@ -6,9 +6,9 @@
   --color-surface: #0e0e0e;
   --color-surface-dim: #0e0e0e;
   --color-surface-container-lowest: #000000;
-  --color-surface-container-low: #131313;
-  --color-surface-container: #1a1919;
-  --color-surface-container-high: #201f1f;
+  --color-surface-container-low: #111111;
+  --color-surface-container: #161616;
+  --color-surface-container-high: #1e1e1e;
   --color-surface-container-highest: #262626;
   --color-surface-bright: #2c2c2c;
   --color-surface-variant: #262626;
@@ -52,13 +52,14 @@
 
   /* Typography */
   --font-headline: "Space Grotesk", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-label: "Inter", sans-serif;
+  --font-body: "Space Grotesk", sans-serif;
+  --font-label: "Space Grotesk", sans-serif;
 
   /* Border radius */
-  --radius: 0.125rem;
-  --radius-lg: 0.25rem;
-  --radius-xl: 0.5rem;
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
   --radius-full: 9999px;
 }
 
@@ -73,8 +74,14 @@ html {
 body {
   background: #0e0e0e;
   color: #ffffff;
-  font-family: "Inter", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(204, 151, 255, 0.3); }
 
 /* Selection */
 ::selection {
@@ -82,23 +89,59 @@ body {
   color: #000000;
 }
 
-/* Custom effects */
-.neon-glow {
-  box-shadow: 0 0 40px 0px rgba(168, 85, 247, 0.15);
+/* ── Grain overlay ──────────────────────────────────────── */
+.grain-overlay {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+  animation: grain 8s steps(10) infinite;
 }
 
-.neon-glow-hover:hover {
-  box-shadow: 0 0 50px 5px rgba(168, 85, 247, 0.3);
+@keyframes grain {
+  0%,  100% { transform: translate(0,    0   ); }
+  10%        { transform: translate(-2%, -2%  ); }
+  20%        { transform: translate( 2%,  2%  ); }
+  30%        { transform: translate(-1%,  1%  ); }
+  40%        { transform: translate( 1%, -1%  ); }
+  50%        { transform: translate(-2%,  1%  ); }
+  60%        { transform: translate( 2%, -2%  ); }
+  70%        { transform: translate(-1%, -2%  ); }
+  80%        { transform: translate( 2%,  1%  ); }
+  90%        { transform: translate(-2%,  2%  ); }
 }
 
+/* ── Background orb animations ─────────────────────────── */
+@keyframes orb-float-1 {
+  0%,  100% { transform: translate(  0px,   0px) scale(1   ); opacity: 0.55; }
+  33%        { transform: translate( 50px, -35px) scale(1.08); opacity: 0.75; }
+  66%        { transform: translate(-25px,  20px) scale(0.96); opacity: 0.45; }
+}
+
+@keyframes orb-float-2 {
+  0%,  100% { transform: translate(  0px,   0px) scale(1   ); opacity: 0.4; }
+  33%        { transform: translate(-35px,  28px) scale(1.06); opacity: 0.6; }
+  66%        { transform: translate( 28px, -18px) scale(0.97); opacity: 0.3; }
+}
+
+.orb-1 { animation: orb-float-1 20s ease-in-out infinite; }
+.orb-2 { animation: orb-float-2 26s ease-in-out infinite; }
+
+/* ── Effects ────────────────────────────────────────────── */
 .glass-panel {
-  background: rgba(26, 25, 25, 0.6);
+  background: rgba(17, 17, 17, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
 
-.neon-glow-spotify  { box-shadow: -4px 0 20px -5px rgba(29, 185, 84, 0.3); }
-.neon-glow-netflix  { box-shadow: -4px 0 20px -5px rgba(229, 9, 20, 0.3); }
-.neon-glow-steam    { box-shadow: -4px 0 20px -5px rgba(23, 26, 33, 0.5); }
-.neon-glow-google   { box-shadow: -4px 0 20px -5px rgba(66, 133, 244, 0.3); }
-.neon-glow-instagram { box-shadow: -4px 0 20px -5px rgba(225, 48, 108, 0.3); }
+/* Platform card glows — ambient bottom shadow (not left-side) */
+.neon-glow-spotify   { box-shadow: 0 8px 40px -12px rgba(29,  185,  84, 0.28); }
+.neon-glow-netflix   { box-shadow: 0 8px 40px -12px rgba(229,   9,  20, 0.28); }
+.neon-glow-steam     { box-shadow: 0 8px 40px -12px rgba(103, 159, 204, 0.22); }
+.neon-glow-google    { box-shadow: 0 8px 40px -12px rgba( 66, 133, 244, 0.28); }
+.neon-glow-instagram { box-shadow: 0 8px 40px -12px rgba(225,  48, 108, 0.28); }

@@ -20,7 +20,6 @@ type AppState = "landing" | "loading" | "story" | "recap";
 
 function mergeStatsPreservingValues(base: LifeStats, incoming: LifeStats): LifeStats {
   const next: LifeStats = { ...base };
-
   for (const [key, value] of Object.entries(incoming)) {
     if (value != null) {
       next[key] = value;
@@ -28,7 +27,6 @@ function mergeStatsPreservingValues(base: LifeStats, incoming: LifeStats): LifeS
       next[key] = value;
     }
   }
-
   return next;
 }
 
@@ -39,6 +37,13 @@ const GLOW_CLASSES: Record<string, string> = {
   netflix: "neon-glow-netflix",
   steam: "neon-glow-steam",
 };
+
+function getColSpan(index: number, total: number): string {
+  if (total === 1) return "md:col-span-12";
+  if (total % 2 !== 0 && index === total - 1) return "md:col-span-12";
+  const pattern = ["md:col-span-7", "md:col-span-5", "md:col-span-5", "md:col-span-7"];
+  return pattern[index % 4];
+}
 
 export default function Home() {
   const [appState, setAppState] = useState<AppState>("landing");
@@ -139,18 +144,24 @@ export default function Home() {
     return (
       <>
         <TopBar showNav={false} />
-        <div className="min-h-screen pt-20">
+        <div className="min-h-[100dvh] pt-20">
           <main className="px-6 py-12 max-w-7xl mx-auto">
+
             {/* Hero header */}
-            <section className="mb-20">
+            <motion.section
+              className="mb-20"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
-                  <h2
-                    className="text-[#adaaaa] uppercase tracking-[0.3em] text-sm mb-4"
+                  <p
+                    className="text-[#adaaaa] uppercase tracking-[0.3em] text-xs mb-4"
                     style={{ fontFamily: "var(--font-space-grotesk)" }}
                   >
                     The Final Verdict
-                  </h2>
+                  </p>
                   <h1
                     className="text-6xl md:text-8xl font-bold tracking-tighter leading-none"
                     style={{ fontFamily: "var(--font-space-grotesk)" }}
@@ -160,37 +171,41 @@ export default function Home() {
                     <span style={{ color: "#cc97ff" }}>O FORSE NO.</span>
                   </h1>
                 </div>
-                <p className="max-w-xs text-[#adaaaa] text-lg leading-relaxed italic">
+                <p className="max-w-xs text-[#adaaaa] text-lg leading-relaxed italic hidden md:block">
                   &ldquo;Un anno intero riassunto in numeri che confermano quello che già sapevamo.&rdquo;
                 </p>
               </div>
-            </section>
+              <div className="mt-10 h-px bg-gradient-to-r from-white/10 to-transparent" />
+            </motion.section>
 
-            {/* Stats grid */}
+            {/* Stats — asymmetric bento grid */}
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24"
+              className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-24"
               variants={staggerContainer}
               initial="initial"
               animate="animate"
             >
-              {sourceCards.map((card) => {
-                return (
-                  <StatCard
-                    key={card.source}
-                    platform={card.sourceLabel}
-                    platformColor={card.sourceColor}
-                    stats={card.stats}
-                    phrase={card.phrase}
-                    icon={card.sourceIcon}
-                    glowClass={GLOW_CLASSES[card.source]}
-                  />
-                );
-              })}
+              {sourceCards.map((card, i) => (
+                <StatCard
+                  key={card.source}
+                  platform={card.sourceLabel}
+                  platformColor={card.sourceColor}
+                  stats={card.stats}
+                  phrase={card.phrase}
+                  icon={card.sourceIcon}
+                  glowClass={GLOW_CLASSES[card.source]}
+                />
+              ))}
             </motion.div>
 
             {/* Share section */}
-            <section className="flex flex-col items-center gap-8 py-16 border-t border-white/5">
-              <div className="text-center space-y-4">
+            <section className="flex flex-col items-center gap-8 py-16 border-t border-white/[0.06]">
+              <motion.div
+                className="text-center space-y-3"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              >
                 <h2
                   className="text-3xl font-bold tracking-tight"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
@@ -200,10 +215,16 @@ export default function Home() {
                 <p className="text-[#adaaaa]">
                   Esporta il tuo LifeWrapped e mostralo al mondo (se ne hai il coraggio).
                 </p>
-              </div>
+              </motion.div>
               {savedToken && <ShareButton token={savedToken} />}
             </section>
           </main>
+        </div>
+
+        {/* Background orbs */}
+        <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+          <div className="orb-1 absolute top-[15%] left-[10%] w-[600px] h-[600px] bg-[#cc97ff]/5 rounded-full blur-[130px]" />
+          <div className="orb-2 absolute bottom-[15%] right-[8%] w-[450px] h-[450px] bg-[#7c3aed]/4 rounded-full blur-[110px]" />
         </div>
       </>
     );
@@ -253,15 +274,27 @@ export default function Home() {
         </section>
 
         {/* Source selector */}
-        <SourceSelector selected={selected} onToggle={toggleSource} />
+        <motion.div
+          className="w-full"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <SourceSelector selected={selected} onToggle={toggleSource} />
+        </motion.div>
 
         {/* File uploaders / Steam input */}
         {selected.size > 0 && (
-          <div className="w-full mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <motion.div
+            className="w-full mt-10 grid grid-cols-1 md:grid-cols-2 gap-6"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
             {PLATFORMS.filter((p) => selected.has(p.key)).map((platform) => (
               <div
                 key={platform.key}
-                className="bg-[#131313] rounded-xl p-6 border border-white/5"
+                className="bg-[#111111] rounded-2xl p-6 border border-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <span
@@ -292,7 +325,7 @@ export default function Home() {
                 )}
               </div>
             ))}
-          </div>
+          </motion.div>
         )}
 
         {/* Error message */}
@@ -303,29 +336,34 @@ export default function Home() {
         )}
 
         {/* CTA */}
-        <div className="relative group mt-12">
-          <div className="absolute -inset-1 bg-gradient-to-r from-[#cc97ff] to-[#9c48ea] rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200" />
-          <button
-            onClick={handleGenerate}
-            disabled={selected.size === 0}
-            className="relative bg-gradient-to-b from-[#cc97ff] to-[#9c48ea] text-black px-12 py-5 rounded-full font-extrabold text-xl uppercase tracking-tighter flex items-center gap-4 transition-transform active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
-          >
-            Genera il mio LifeWrapped
-            <span className="material-symbols-outlined">arrow_forward</span>
-          </button>
-        </div>
-
-        <p
-          className="mt-12 text-[#adaaaa] text-sm italic opacity-60"
+        <motion.button
+          onClick={handleGenerate}
+          disabled={selected.size === 0}
+          className="mt-12 bg-[#cc97ff] text-black px-12 py-5 rounded-full font-extrabold text-xl uppercase tracking-tighter flex items-center gap-4 disabled:opacity-40 disabled:cursor-not-allowed"
           style={{ fontFamily: "var(--font-space-grotesk)" }}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          whileHover={{ scale: 1.03, transition: { type: "spring", stiffness: 350, damping: 25 } }}
+          whileTap={{ scale: 0.96, y: 2, transition: { type: "spring", stiffness: 400, damping: 30 } }}
+        >
+          Genera il mio LifeWrapped
+          <span className="material-symbols-outlined">arrow_forward</span>
+        </motion.button>
+
+        <motion.p
+          className="mt-10 text-[#adaaaa] text-sm italic opacity-50"
+          style={{ fontFamily: "var(--font-space-grotesk)" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
         >
           * I tuoi file non vengono mai salvati su disco. Promesso. Forse.
-        </p>
+        </motion.p>
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#0a0a0a] w-full py-12 px-6">
+      <footer className="bg-[#0a0a0a] w-full py-12 px-6 border-t border-white/[0.04]">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full max-w-7xl mx-auto">
           <div className="text-white text-[10px] uppercase tracking-[0.2em]">
             © 2025 LIFEWRAPPED. NO RIGHTS RESERVED.
@@ -341,8 +379,11 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Background glow */}
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#cc97ff]/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
+      {/* Background orbs */}
+      <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+        <div className="orb-1 absolute top-[20%] left-[15%] w-[550px] h-[550px] bg-[#cc97ff]/6 rounded-full blur-[130px]" />
+        <div className="orb-2 absolute bottom-[20%] right-[10%] w-[420px] h-[420px] bg-[#7c3aed]/4 rounded-full blur-[110px]" />
+      </div>
     </>
   );
 }

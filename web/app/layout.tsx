@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
   display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -30,12 +25,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="it"
-      className={`${inter.variable} ${spaceGrotesk.variable} dark`}
-    >
+    <html lang="it" className={`${spaceGrotesk.variable} dark`}>
       <body className="min-h-screen bg-[#0e0e0e] text-white antialiased">
         {children}
+        <div className="grain-overlay" aria-hidden="true" />
       </body>
     </html>
   );
